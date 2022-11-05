@@ -4,7 +4,7 @@ import { Client } from "../src/entities/Client";
 import { Transaction } from "../src/entities/Transaction";
 
 // db connection
-export const AppDataSource = new DataSource({
+export const appDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,

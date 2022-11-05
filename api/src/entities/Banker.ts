@@ -14,7 +14,7 @@ export class Banker extends Person {
 
 
     // Because we have a m2m relationship, we don't have a foreign key in the other entity
-    // to which this refers. We create a separate table, and that table contains two columns; the ide
+    // to which this refers. We create a separate table, and that table contains two columns; the id
     // of the banker, and the id of the client, which maps them together. https://youtu.be/JaTbzPcyiOE?t=3448
     @ManyToMany(
         () => Client
