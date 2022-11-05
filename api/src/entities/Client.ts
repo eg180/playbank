@@ -9,12 +9,6 @@ export class Client extends Person {
     id: number;
 
     @Column({
-        unique: true,
-        length: 10,
-    })
-    card_number: string;
-
-    @Column({
         type: "numeric",
         default: 0
     })
