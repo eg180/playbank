@@ -1,13 +1,13 @@
 
 import express from 'express';
-import {AppDataSource} from '../dbconfig'
+import {appDataSource} from '../dbconfig'
 const clientRouter = require("../auth/client");
 const bankerRouter = require("../auth/banker");
 const transactionRouter = require("../auth/client/transaction")
 
 const app = express();
 
-AppDataSource.initialize()
+appDataSource.initialize()
 .then(() => {
   console.log("Data Source has been initialized!");
   app.listen(5000, () => {

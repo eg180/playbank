@@ -3,10 +3,11 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, Pr
 
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
-    WITHDRAW = 'withdraw'
+    WITHDRAW = 'withdraw',
+    TRANSFER = 'transfer'
 }
 
-@Entity("transactions")
+@Entity("transaction")
 export class Transaction extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
