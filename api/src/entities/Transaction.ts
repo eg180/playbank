@@ -14,7 +14,7 @@ export class Transaction extends BaseEntity {
     })
     type: string;
 
-    @Column({type: 'numeric'})
+    @Column({type: 'money', nullable: false})
     amount: number;
 
     @ManyToOne(
