@@ -1,7 +1,7 @@
 import { appDataSource } from "../../../../../../api/dbconfig"
 import { Balance } from "../../../../../src/entities/Balance";
 
-module.exports = async (req: any, res: any, next: () => void) => {
+module.exports = async (req: any, res: any, next: any) => {
   const { client_id } = req.body;
 
 

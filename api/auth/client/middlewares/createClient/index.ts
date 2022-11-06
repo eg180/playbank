@@ -1,6 +1,6 @@
 import { Client } from '../../../../src/entities/Client';
 
-module.exports = async (req: { body: { firstName: string; lastName: string; email: string; client_id?: any}; }, res: { json: (arg0: Client) => any; }, next: any) => {
+module.exports = async (req: { body: { firstName: string; lastName: string; email: string; client_id?: any}; }, res: any, next: any) => {
     const { firstName, lastName, email } = req.body;
 
     const client = Client.create({

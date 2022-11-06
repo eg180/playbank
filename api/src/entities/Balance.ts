@@ -8,7 +8,7 @@ export class Balance extends BaseEntity {
     id: number;
 
 
-    @Column({type: "money", default: 0})
+    @Column({type: "float", default: 0.00, nullable: false})
     balance: number;
 
     @OneToOne(() => Client)
