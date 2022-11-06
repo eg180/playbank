@@ -1,6 +1,11 @@
 import express from 'express';
 import {Client} from '../../src/entities/Client'
 
+// middleware
+const createClient = require('./middlewares/createClient')
+const instantiateBalance = require("./transaction/middlewares/instantiateBalance");
+
+
 const router = express.Router();
 
 router.get('/getall', async (req, res) => {
@@ -9,17 +14,8 @@ router.get('/getall', async (req, res) => {
 })
 
 
-router.post('/create', async (req, res) => {
-    const { firstName, lastName, email } = req.body;
-
-    const client = Client.create({
-        first_name: firstName,
-        last_name: lastName,
-        email,
-    })
-
-    await client.save()
-    return res.json(client);
+router.post('/create', createClient, instantiateBalance, async (req, res) => {
+    return res.status(201).json({success: "ok"})
 })
 
 
