@@ -3,7 +3,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, Pr
 import { TransactionTypes } from "../../types/common"
 
 
-@Entity("transaction")
+@Entity("transactions")
 export class Transaction extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;

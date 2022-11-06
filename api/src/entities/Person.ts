@@ -1,10 +1,8 @@
 import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('person')
+@Entity('persons')
 export class Person extends BaseEntity {
-    @PrimaryGeneratedColumn({
-        primaryKeyConstraintName: 'user_id'
-    })
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
