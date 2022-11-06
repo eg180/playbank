@@ -2,7 +2,7 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "t
 import { Client } from "./Client";
 import { Person } from "./Person";
 
-@Entity('banker')
+@Entity('bankers')
 export class Banker extends Person {
     @PrimaryGeneratedColumn()
     id: number;

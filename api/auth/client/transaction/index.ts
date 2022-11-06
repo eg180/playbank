@@ -1,7 +1,9 @@
 import express from "express";
 import { appDataSource } from "../../../../api/dbconfig";
 import { Transaction } from "../../../src/entities/Transaction";
-import { getObjectForTransaction } from "./factories/transaction";
+
+// middleware
+const adjustBalances = require("./middlewares/adjustBalances")
 
 const router = express.Router();
 
@@ -19,18 +21,7 @@ router.get("/:clientId", async (req, res) => {
   }
 });
 
-router.post("/create/:clientId", async (req, res) => {
-  const { clientId } = req.query;
-
-  // We use a single endpoint for deposits, tranfers and withdrawals. The data to be saved to the db depends on the type.
-  const obj: any = getObjectForTransaction(req.body, clientId as any);
-
-  const transaction = Transaction.create({
-    ...obj,
-  });
-  await transaction.save();
-
-  return res.status(201).json(transaction);
+router.post("/create/:clientId", adjustBalances, async (req, res) => {
 });
 
 module.exports = router;

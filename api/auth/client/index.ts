@@ -10,13 +10,12 @@ router.get('/getall', async (req, res) => {
 
 
 router.post('/create', async (req, res) => {
-    const { firstName, lastName, email, balance } = req.body;
+    const { firstName, lastName, email } = req.body;
 
     const client = Client.create({
         first_name: firstName,
         last_name: lastName,
         email,
-        balance
     })
 
     await client.save()
