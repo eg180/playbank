@@ -1,11 +1,14 @@
-import React from 'react'
-import { StyledBanner } from '../styles/Banner.style'
-import { StyledNavButton } from '../styles/NavButton.style'
+import React, { useState } from 'react';
+import { StyledBanner } from '../styles/Banner.style';
+import LoginDropDown from './LoginDropDown';
+import { StyledNavButton } from '../styles/NavButton.style';
 
 const Banner = () => {
+  const [showLogin, setShowLogin]  = useState(false);
   return (
     <StyledBanner>
-    <nav><StyledNavButton>Sign In</StyledNavButton></nav>
+    <nav><StyledNavButton onClick={() => setShowLogin(!showLogin)}>Sign In</StyledNavButton></nav>
+    {showLogin && <LoginDropDown />}
     <section id="hero">
         <img id="logo" src="./images/PlayBank.png" alt="PlayBank Logo" />
         <div id="logo-right">
