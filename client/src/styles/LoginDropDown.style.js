@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const StyledLoginDropDown = styled.div`
+export const StyledSignInSignUpInput = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;

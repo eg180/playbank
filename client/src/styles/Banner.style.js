@@ -8,6 +8,17 @@ export const StyledBanner = styled.header`
     #hero {
         display: flex;
     }
+    nav {
+        background-color: #3c096c;
+    }
+    #form-group {
+        display: flex;
+        align-items: center;
+        #no-acct {
+            color: white;
+            padding: 1rem;
+        }
+    }
     section {
         background-color: white;
         display: flex;
@@ -30,6 +41,10 @@ export const StyledBanner = styled.header`
         ul img {
             max-width: 10%;
         }
+    }
+    .mimic-link {
+        cursor: pointer;
+        border-bottom: 1px solid red;
     }
     
 `
