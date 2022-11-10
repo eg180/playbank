@@ -22,6 +22,12 @@ export class Person extends BaseEntity {
     email: string;
 
     @Column({
+        unique: false,
+        nullable: false
+    })
+    password: string;
+
+    @Column({
         default: true,
         name: "active"
     })

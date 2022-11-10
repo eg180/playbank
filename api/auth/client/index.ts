@@ -6,7 +6,6 @@ const createClient = require('./middlewares/createClient')
 const instantiateBalance = require("./transaction/middlewares/instantiateBalance");
 
 
-
 const router = express.Router();
 
 router.get('/getall', async (req, res) => {

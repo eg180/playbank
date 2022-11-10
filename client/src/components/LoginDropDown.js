@@ -7,22 +7,25 @@ const LoginDropDown = () => {
     const passwordInputRef = useRef();
 
     const handleSubmit = (e) => {
-        console.log('in handle submit')
         e.preventDefault();
         const signInObject: ClientSignUpInterface = {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
-        axios.post(`http://localhost:5000/api/auth/login`, signInObject);
+        axios.post(`http://localhost:5000/api/auth/login`, signInObject).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err.response.data);
+        });
     };
 
     return (
         <StyledSignInSignUpInput>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Emdail" ref={emailInputRef} />
+                <input type="text" placeholder="Email" ref={emailInputRef} />
                 <input type="text" placeholder="Password" ref={passwordInputRef} />
-                <button type="submit" onClick={handleSubmit}>
-                    Submit
+                <button type="submit">
+                    Sudbmit
                 </button>
             </form>
         </StyledSignInSignUpInput>

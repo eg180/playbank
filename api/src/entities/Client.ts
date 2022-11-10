@@ -1,6 +1,6 @@
 import { Banker } from './Banker';
 import { Transaction } from './Transaction';
-import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 import { Person } from './Person';
 
 @Entity('clients')
