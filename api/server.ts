@@ -4,6 +4,7 @@ import {appDataSource} from './dbconfig';
 
 const cors = require('cors')
 const signInRouter = require("./auth/login");
+const signUpRouter = require("./auth/signup");
 const clientRouter = require("./auth/client");
 const bankerRouter = require("./auth/banker");
 const transactionRouter = require("./auth/client/transaction");
@@ -32,6 +33,7 @@ app.use(cors({
 app.use(express.json());
 // routes
 app.use("/api/auth/login", signInRouter);
+app.use("/api/auth/signup", signUpRouter);
 app.use("/api/auth/client", clientRouter);
 app.use("/api/auth/banker", bankerRouter);
 app.use("/api/auth/client/transaction", transactionRouter);
