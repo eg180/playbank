@@ -8,9 +8,8 @@ const router = express.Router();
 // router.use(cors());
 
 
-router.post('/', loginVerification, (__, res) => {
-    return res.status(201).json({success: "ok"})
-})
+router.post('/', loginVerification, (req, res, next) => {
+});
 
 
 
