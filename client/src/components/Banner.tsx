@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 import { StyledBanner } from '../styles/Banner.style';
 import LoginDropDown from './LoginDropDown';
 import CreateAccountDropDown from './CreateAccountDropDown';
@@ -16,6 +17,10 @@ const Banner = () => {
     return (
         <StyledBanner>
             <nav>
+                <StyledNavButton bgColor={"#41ead4"} color="black">
+                        <Link to={"/sendmoney"}>Send IOU 🏎</Link>
+                    </StyledNavButton>
+                <Link to="/"><span id="logo">as good as money</span></Link>
                 <div id="form-group">
                     <span id="no-acct">
                         {(showSignIn || showCreateAccount) ? 
@@ -42,36 +47,6 @@ const Banner = () => {
             </nav>
             {showCreateAccount && <CreateAccountDropDown />}
             {showSignIn && <LoginDropDown />}
-
-            <section id="hero">
-                <img id="logo" src="./images/PlayBank.png" alt="PlayBank Logo" />
-                <div id="logo-right">
-                    <span id="tech-title"> 🧰 Tech used</span>
-                    <ul>
-                        <li>
-                            <img src="./images/typescript-icon.svg" alt="TypeScript logo" /> Typescript
-                        </li>
-                        <li>
-                            <img src="./images/express.svg" alt="Express logo" /> Express.js
-                        </li>
-                        <li>
-                            <img src="./images/react-query-icon.svg" alt="React Query logo" /> React Query
-                        </li>
-                        <li>
-                            <img src="./images/postgresql.svg" alt="PostgreSQL logo" /> PostgreSQL
-                        </li>
-                        <li>
-                            <img src="./images/ts.png" alt="TypeScript logo" /> TypeORM
-                        </li>
-                        <li>
-                            <img src="./images/react.svg" alt="React logo" /> React
-                        </li>
-                        <li>
-                            <img src="./images/sc.png" alt="Styled Components logo" /> Styled Components
-                        </li>
-                    </ul>
-                </div>
-            </section>
         </StyledBanner>
     );
 };
