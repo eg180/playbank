@@ -18,7 +18,8 @@ const Banner = () => {
             <nav>
                 <div id="form-group">
                     <span id="no-acct">
-                        {showSignIn ? (
+                        {(showSignIn || showCreateAccount) ? 
+                        showSignIn ? (
                             <div>
                                 No account?{' '}
                                 <span className={'mimic-link'} onClick={handleInputToggle}>
@@ -32,7 +33,7 @@ const Banner = () => {
                                 </span>{' '}
                                 instead?
                             </div>
-                        )}
+                        ): null}
                     </span>
                     <StyledNavButton disabled={showSignIn || showCreateAccount} onClick={() => setShowSignIn(true)}>
                         {showCreateAccount ? 'Signing Up' : showSignIn ? 'Signing In' : 'Sign In'}
