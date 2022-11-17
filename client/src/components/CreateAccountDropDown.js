@@ -8,7 +8,7 @@ const CreateAccountDropDown = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const passwordConfirmInputRef = useRef();
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         const signUpObject = {
@@ -17,6 +17,7 @@ const CreateAccountDropDown = () => {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
+        
         try {
              await axios.post(`http://localhost:5000/api/auth/client/create`, signUpObject);
              console.log('sign up successful!');
