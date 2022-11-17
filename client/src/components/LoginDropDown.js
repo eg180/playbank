@@ -6,16 +6,17 @@ const LoginDropDown = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        console.log('handling sign in submit');
         e.preventDefault();
         const signInObject: ClientSignUpInterface = {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
-        axios.post(`http://localhost:5000/api/auth/login`, signInObject).then(res => {
+        await axios.post(`http://localhost:5000/api/auth/login`, signInObject).then(res => {
             console.log(res)
         }).catch(err => {
-            console.log(err.response.data);
+            console.log(err);
         });
     };
 
@@ -25,7 +26,7 @@ const LoginDropDown = () => {
                 <input type="text" placeholder="Email" ref={emailInputRef} />
                 <input type="text" placeholder="Password" ref={passwordInputRef} />
                 <button type="submit">
-                    Sudbmit
+                    Submit
                 </button>
             </form>
         </StyledSignInSignUpInput>
