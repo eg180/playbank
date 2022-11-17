@@ -9,8 +9,7 @@ const CreateAccountDropDown = () => {
     const passwordInputRef = useRef();
     const passwordConfirmInputRef = useRef();
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const signUpObject = {
             firstName: firstNameInputRef.current.value,
@@ -18,11 +17,12 @@ const CreateAccountDropDown = () => {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
-        axios.post(`http://localhost:5000/api/auth/client/create`, signUpObject).then((res) => {
-            console.log('Sign up successful!').catch((error) => {
-                console.log("Boo. Something didn't quite go as planned.");
-            });
-        });
+        try {
+             await axios.post(`http://localhost:5000/api/auth/client/create`, signUpObject);
+             console.log('sign up successful!');
+        } catch (error) {
+            console.log("Boo. Something didn't quite go as planned.");
+        }
     };
 
     return (
