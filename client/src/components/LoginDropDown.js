@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { StyledSignInSignUpInput } from '../styles/LoginDropDown.style';
 
 const LoginDropDown = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         console.log('handling sign in submit');
@@ -15,6 +17,7 @@ const LoginDropDown = () => {
         };
         await axios.post(`http://localhost:5000/api/auth/login`, signInObject).then(res => {
             console.log(res)
+            navigate('/sendmoney')
         }).catch(err => {
             console.log(err);
         });

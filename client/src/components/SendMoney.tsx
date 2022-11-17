@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyledSendMoney } from '../styles/SendMoney.style'
+
+import { StyledSendMoney } from '../styles/SendMoney.style';
 
 const SendMoney = () => {
-  return (
-    <StyledSendMoney>SendMoney</StyledSendMoney>
-  )
-}
+    return (
+        <StyledSendMoney>
+           'send money!'
+        </StyledSendMoney>
+    );
+};
 
-export default SendMoney
+export default SendMoney;

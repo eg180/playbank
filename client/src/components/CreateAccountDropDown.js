@@ -19,7 +19,7 @@ const CreateAccountDropDown = () => {
         };
         
         try {
-             await axios.post(`http://localhost:5000/api/auth/client/create`, signUpObject);
+             await axios.post(`http://localhost:5000/api/auth/signup`, signUpObject);
              console.log('sign up successful!');
         } catch (error) {
             console.log("Boo. Something didn't quite go as planned.");
