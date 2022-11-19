@@ -6,6 +6,9 @@ export const StyledLandingMain = styled.main`
         padding: 2rem;
     }
     #content {
-        min-height: 20vh;
+        min-height: 80vh;
+        background-image: url('/images/dumbndumber.png');
+        background-size:cover;
+        background-repeat:no-repeat;
     }
 `;

@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
 export const StyledBanner = styled.header`
-    background-color: #f8f7ff;
+    background-color: #31293d;
     border-bottom: solid 1px #f8edeb;
     display: flex;
     flex-direction: column;
+    #logo {
+        font-family: 'Red Hat Display', sans-serif;
+        font-size: 3rem;
+        
+        color: white;
+    }
     #hero {
         margin: 5rem;
         display: flex;
@@ -14,10 +20,6 @@ export const StyledBanner = styled.header`
         justify-content: space-between;
         background-color: #3c096c;
         align-items: center;
-        #logo {
-            font-size: 3rem;
-            color: white;
-        }
     }
     #form-group {
         display: flex;
@@ -26,6 +28,9 @@ export const StyledBanner = styled.header`
             color: white;
             padding: 1rem;
         }
+    }
+    #inputs {
+        margin-top: 0rem;
     }
     section {
         background-color: white;

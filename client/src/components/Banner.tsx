@@ -1,52 +1,102 @@
-import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { StyledBanner } from '../styles/Banner.style';
 import LoginDropDown from './LoginDropDown';
 import CreateAccountDropDown from './CreateAccountDropDown';
 import { StyledNavButton } from '../styles/NavButton.style';
 
 const Banner = () => {
-    const [showSignIn, setShowSignIn] = useState(false);
-    const [showCreateAccount, setShowCreateAccount] = useState(false);
+    const [showSignIn, setShowSignIn] = useState<boolean>(false);
+    const [showCreateAccount, setShowCreateAccount] = useState<boolean>(false);
+    const [user, setUser] = useState<string | undefined>(undefined);
 
-    const handleInputToggle = () => {
-        setShowSignIn((prevState) => setShowSignIn(!prevState));
-        setShowCreateAccount((prevState) => setShowCreateAccount(!prevState));
+    enum ToggleOptions {
+        SignUp = 'signup',
+        SignIn = 'signin',
+        Cancel = 'cancel',
+    }
+
+
+    const handleInputToggle = (toggleOption: ToggleOptions) => {
+        if (toggleOption === ToggleOptions.SignUp) {
+            console.log('in sign up');
+            setShowSignIn(false);
+            setShowCreateAccount(true);
+            return;
+        } else if (toggleOption === ToggleOptions.SignIn) {
+            setShowSignIn(true);
+            setShowCreateAccount(false);
+            return;
+        } else if (toggleOption === ToggleOptions.Cancel) {
+            setShowSignIn(false);
+            setShowCreateAccount(false);
+        }
     };
+
+    const getUserData = (): string | undefined => {
+        try {
+            return JSON.parse(sessionStorage.getItem("sesh") ?? '');
+        } catch (error) {
+           return undefined
+        }
+    }
+
+    useEffect(() => {
+        console.log('setting user data to this', getUserData());
+        setUser(getUserData());
+
+    }, [user])
+
 
     return (
         <StyledBanner>
-            <nav>
-                <StyledNavButton bgColor={"#41ead4"} color="black">
-                        <Link to={"/sendmoney"}>Send IOU 🏎</Link>
+                <div id="logo">As Good As Money</div>
+                {JSON.stringify(user)}
+                <nav>
+                    <StyledNavButton bgColor={'#41ead4'} color="black">
+                        <Link to={'/sendmoney'}>Send IOU 🏎</Link>
                     </StyledNavButton>
-                <Link to="/"><span id="logo">as good as money</span></Link>
-                <div id="form-group">
-                    <span id="no-acct">
-                        {(showSignIn || showCreateAccount) ? 
-                        showSignIn ? (
-                            <div>
-                                No account?{' '}
-                                <span className={'mimic-link'} onClick={handleInputToggle}>
-                                    Create one
-                                </span>
-                            </div>
-                        ) : (
-                            <div>
-                                <span className={'mimic-link'} onClick={handleInputToggle}>
-                                    Sign in
-                                </span>{' '}
-                                instead?
-                            </div>
-                        ): null}
-                    </span>
-                    <StyledNavButton disabled={showSignIn || showCreateAccount} onClick={() => setShowSignIn(true)}>
-                        {showCreateAccount ? 'Signing Up' : showSignIn ? 'Signing In' : 'Sign In'}
-                    </StyledNavButton>
-                </div>
-            </nav>
-            {showCreateAccount && <CreateAccountDropDown />}
-            {showSignIn && <LoginDropDown />}
+                    {user === undefined && <div id="form-group">
+                        <span id="no-acct">
+                            {showSignIn || showCreateAccount ? (
+                                showSignIn ? (
+                                    <div>
+                                        No account?{' '}
+                                        <span
+                                            className={'mimic-link'}
+                                            onClick={() => handleInputToggle(ToggleOptions.SignUp)}
+                                        >
+                                            Create one
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <span
+                                            className={'mimic-link'}
+                                            onClick={() => handleInputToggle(ToggleOptions.SignIn)}
+                                        >
+                                            Sign in
+                                        </span>{' '}
+                                        instead?
+                                    </div>
+                                )
+                            ) : null}
+                        </span>
+                       {user === undefined && <StyledNavButton
+                            onClick={() =>
+                                handleInputToggle(
+                                    showSignIn || showCreateAccount ? ToggleOptions.Cancel : ToggleOptions.SignIn,
+                                )
+                            }
+                        >
+                            {showSignIn || showCreateAccount ? 'Cancel' : 'Connect'}
+                        </StyledNavButton>}
+                    </div>}
+                </nav>
+                {(user === undefined) && <div id="inputs">
+                    {showCreateAccount && <CreateAccountDropDown setShowCreateAccount={setShowCreateAccount} />}
+                    {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} setUser={setUser} />}
+                </div>}
         </StyledBanner>
     );
 };

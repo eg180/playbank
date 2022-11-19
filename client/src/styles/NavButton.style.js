@@ -4,7 +4,7 @@ export const StyledNavButton = styled.button`
     padding: 0.75rem 1.75rem;
     display: inline-block;
     border: none;
-    margin: 0 2rem 0 2rem;
+    margin: 1rem 1rem;
     text-decoration: none;
     /* background: #6930c3; */
     background-color: ${(props) => (props.bgColor ? props.bgColor : '#6930c3')};
