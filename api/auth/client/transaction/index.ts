@@ -19,7 +19,6 @@ router.get("/:clientId", async (req, res) => {
       .getMany();
     return res.status(200).json(results);
   } catch (error) {
-    console.log('line 22 again')
     return res.status(401).json({ error: "something went wrong" });
   }
 });

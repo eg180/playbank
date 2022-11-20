@@ -19,7 +19,6 @@ module.exports = async (req: any, res: any, next: any) => {
     next();
   } catch (error) {
     console.log('Unable to initialize balance.')
-    console.log('line 22')
     return res.status(401).json({message: 'Unable to initialize balance.'})
   }
 };

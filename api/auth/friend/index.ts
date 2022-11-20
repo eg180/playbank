@@ -38,7 +38,6 @@ router.post('/add', async (req, res) => {
         .where(`id = ${clientId}`, { client: clientId })
         .execute();
     } else {
-        console.log('line 41')
     return res.status(401).json({message: "Either the user or future friend does not exist."});
 
     }

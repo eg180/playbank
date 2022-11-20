@@ -19,8 +19,6 @@ module.exports = async (req: any, res: any, next: any) => {
   try {
     await transaction.save();
   } catch (error) {
-    console.log(error)
-    console.log('line 22')
     return res
       .status(401)
       .json({ error: "Error saving transaction to database." });
@@ -35,7 +33,6 @@ module.exports = async (req: any, res: any, next: any) => {
         .where(`client = ${clientId}`, { client: clientId })
         .execute();
     } catch (error) {
-      console.log('line 36')
       return res.status(401).json({ error: "Error depositing funds." });
     }
   } else if (type === TransactionTypes.TRANSFER) {
@@ -50,8 +47,6 @@ module.exports = async (req: any, res: any, next: any) => {
         .execute();
       // modify recipient balance
     } catch (error) {
-      console.log(error);
-      console.log('line 51')
       res.status(401).json({ error: "Could not update sender balance" });
     }
     try {
@@ -64,8 +59,6 @@ module.exports = async (req: any, res: any, next: any) => {
         .execute();
       next();
     } catch (error) {
-      console.log(error);
-      console.log('line 64')
       res.status(401).json({ error: "Could not update receiver balance" });
     }
   }

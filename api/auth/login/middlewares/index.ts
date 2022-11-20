@@ -20,7 +20,6 @@ module.exports = async (
     try {
       if (client !== null) {
         bcrypt.compare(password, client.password, function(err: any, __: any) {
-          console.log('line 23')
           if (err) return res.status(401).json({ message: "Invalid Credentials" });
 
           const token = makeJwt(client);
@@ -30,7 +29,6 @@ module.exports = async (
       
     } else {
       // sad path - user exists but password was incorrect
-      console.log('line 33')
       return res.status(401).json({ message: "Invalid Credentials" });
     }
     } catch (error) {
