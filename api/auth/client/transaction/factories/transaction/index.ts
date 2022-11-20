@@ -6,6 +6,7 @@ export const getObjectForTransaction = (reqBod: {
   }, clientId: number) => {
     const { type, amount, transferred_to } = reqBod;
     const originator_id = clientId;
+    console.log('this is who is making the request', originator_id);
     const generatedObj =
       type === TransactionTypes.TRANSFER
         ? {

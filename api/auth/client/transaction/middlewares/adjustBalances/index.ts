@@ -32,6 +32,7 @@ module.exports = async (req: any, res: any, next: any) => {
         .set({ balance: () => `balance + ${transaction.amount}` })
         .where(`client = ${clientId}`, { client: clientId })
         .execute();
+      next();
     } catch (error) {
       return res.status(401).json({ error: "Error depositing funds." });
     }
@@ -50,6 +51,7 @@ module.exports = async (req: any, res: any, next: any) => {
       res.status(401).json({ error: "Could not update sender balance" });
     }
     try {
+      console.log('in second part')
       // modify recipient's balance
       await appDataSource
         .createQueryBuilder()
