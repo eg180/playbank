@@ -16,7 +16,6 @@ const Banner = () => {
         Cancel = 'cancel',
     }
 
-
     const handleInputToggle = (toggleOption: ToggleOptions) => {
         if (toggleOption === ToggleOptions.SignUp) {
             console.log('in sign up');
@@ -35,28 +34,35 @@ const Banner = () => {
 
     const getUserData = (): string | undefined => {
         try {
-            return JSON.parse(sessionStorage.getItem("sesh") ?? '');
+            return JSON.parse(sessionStorage.getItem('sesh') ?? '');
         } catch (error) {
-           return undefined
+            return undefined;
         }
-    }
+    };
 
     useEffect(() => {
         console.log('setting user data to this', getUserData());
         setUser(getUserData());
-
-    }, [user])
-
+    }, [user]);
 
     return (
         <StyledBanner>
-                <div id="logo">As Good As Money</div>
-                {JSON.stringify(user)}
-                <nav>
+            <Link to="/">
+                <div id="logo">
+                    AGAM
+                    <span id="sub-logo">As Good As Money</span>
+                </div>
+            </Link>
+
+            {JSON.stringify(user)}
+            <nav>
+                <Link to={'/sendmoney'}>
                     <StyledNavButton bgColor={'#41ead4'} color="black">
-                        <Link to={'/sendmoney'}>Send IOU 🏎</Link>
+                        Send IOU 🏎
                     </StyledNavButton>
-                    {user === undefined && <div id="form-group">
+                </Link>
+                {user === undefined && (
+                    <div id="form-group">
                         <span id="no-acct">
                             {showSignIn || showCreateAccount ? (
                                 showSignIn ? (
@@ -82,21 +88,26 @@ const Banner = () => {
                                 )
                             ) : null}
                         </span>
-                       {user === undefined && <StyledNavButton
-                            onClick={() =>
-                                handleInputToggle(
-                                    showSignIn || showCreateAccount ? ToggleOptions.Cancel : ToggleOptions.SignIn,
-                                )
-                            }
-                        >
-                            {showSignIn || showCreateAccount ? 'Cancel' : 'Connect'}
-                        </StyledNavButton>}
-                    </div>}
-                </nav>
-                {(user === undefined) && <div id="inputs">
+                        {user === undefined && (
+                            <StyledNavButton
+                                onClick={() =>
+                                    handleInputToggle(
+                                        showSignIn || showCreateAccount ? ToggleOptions.Cancel : ToggleOptions.SignIn,
+                                    )
+                                }
+                            >
+                                {showSignIn || showCreateAccount ? 'Cancel' : 'Connect'}
+                            </StyledNavButton>
+                        )}
+                    </div>
+                )}
+            </nav>
+            {user === undefined && (
+                <div id="inputs">
                     {showCreateAccount && <CreateAccountDropDown setShowCreateAccount={setShowCreateAccount} />}
                     {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} setUser={setUser} />}
-                </div>}
+                </div>
+            )}
         </StyledBanner>
     );
 };
