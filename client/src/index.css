@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Azeret+Mono:wght@200&family=Josefin+Slab:wght@100&family=Red+Hat+Display:wght@300;400&display=swap');
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +8,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
+a {
+  color: pink;
+  background-color: transparent;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -1,5 +1,5 @@
-import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable, OneToMany, ManyToOne } from 'typeorm';
+import { Client } from './Client';
 @Entity('persons')
 export class Person extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -40,12 +40,8 @@ export class Person extends BaseEntity {
     additional_info: {
         language: string
     }
+    
 
-    @Column({
-        type: "simple-array",
-        default: []
-    })
-    friends: string[]
 
     @CreateDateColumn()
     created_at: Date;

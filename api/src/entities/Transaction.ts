@@ -1,5 +1,5 @@
 import { Client } from "./Client";
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { TransactionTypes } from "../../types/common"
 
 
@@ -44,6 +44,11 @@ export class Transaction extends BaseEntity {
         name: 'receiver_user_id'
     })
     transferred_to: Client;
+
+    @ManyToOne(
+        () => Client,
+        client => client.friends
+    )
 
     
 

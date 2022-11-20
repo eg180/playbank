@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledNavButton = styled.button`
+    a {
+        text-decoration: none;
+        color: #264653;
+    }
     padding: 0.75rem 1.75rem;
     display: inline-block;
     border: none;

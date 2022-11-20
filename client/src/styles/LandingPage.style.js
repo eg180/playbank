@@ -7,8 +7,5 @@ export const StyledLandingMain = styled.main`
     }
     #content {
         min-height: 80vh;
-        background-image: url('/images/dumbndumber.png');
-        background-size:cover;
-        background-repeat:no-repeat;
     }
 `;

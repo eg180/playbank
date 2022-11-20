@@ -5,6 +5,7 @@ import Banner from './components/Banner';
 import LandingPage from './components/LandingPage.tsx';
 import Dashboard from './components/Dashboard';
 import SendMoney from './components/SendMoney';
+import Footer from "./components/Footer"
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/sendmoney" element={<SendMoney />} />
             </Routes>
+            <Footer />
         </>
     );
 }

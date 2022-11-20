@@ -5,7 +5,8 @@ import { getObjectForTransaction } from "../../factories/transaction";
 import { TransactionTypes } from "../../../../../types/common";
 
 module.exports = async (req: any, res: any, next: any) => {
-  const { clientId } = req.query;
+  // const { clientId } = req.query;
+  const clientId = req.jwtSub;
   const { type } = req.body;
   // We use a single endpoint for deposits, tranfers and withdrawls. The data to be saved to the db depends on the type.
   const obj: any = getObjectForTransaction(req.body, clientId as any);
@@ -19,6 +20,7 @@ module.exports = async (req: any, res: any, next: any) => {
     await transaction.save();
   } catch (error) {
     console.log(error)
+    console.log('line 22')
     return res
       .status(401)
       .json({ error: "Error saving transaction to database." });
@@ -33,6 +35,7 @@ module.exports = async (req: any, res: any, next: any) => {
         .where(`client = ${clientId}`, { client: clientId })
         .execute();
     } catch (error) {
+      console.log('line 36')
       return res.status(401).json({ error: "Error depositing funds." });
     }
   } else if (type === TransactionTypes.TRANSFER) {
@@ -48,6 +51,7 @@ module.exports = async (req: any, res: any, next: any) => {
       // modify recipient balance
     } catch (error) {
       console.log(error);
+      console.log('line 51')
       res.status(401).json({ error: "Could not update sender balance" });
     }
     try {
@@ -61,6 +65,7 @@ module.exports = async (req: any, res: any, next: any) => {
       next();
     } catch (error) {
       console.log(error);
+      console.log('line 64')
       res.status(401).json({ error: "Could not update receiver balance" });
     }
   }

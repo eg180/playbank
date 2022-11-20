@@ -22,14 +22,18 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+* {
+	
+	transition: all 0.5s ease-out;
+
+}
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
 	line-height: 1;
-	background-color: #f8f7ff;
-	background-color: #31293d;
+	background-color: #fefae0;
 }
 ol, ul {
 	list-style: none;
