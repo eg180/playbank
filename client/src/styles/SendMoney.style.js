@@ -6,6 +6,9 @@ export const StyledSendMoney = styled.main`
     flex-direction: column;
     align-items: center;
     min-height: 80vh;
+    background-image: url('/images/dumbndumber.png');
+    background-size: 120%;
+    background-repeat: no-repeat;
     main {
         display: flex;
         justify-content: center;
@@ -15,7 +18,6 @@ export const StyledSendMoney = styled.main`
         min-height: 50vh;
         max-width: 50vw;
         min-width: 45vw;
-        background: transparent;
         
     }
     @media screen and (max-width: 750px) {

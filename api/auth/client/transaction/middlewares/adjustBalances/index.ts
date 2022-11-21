@@ -51,7 +51,7 @@ module.exports = async (req: any, res: any, next: any) => {
       res.status(401).json({ error: "Could not update sender balance" });
     }
     try {
-      console.log('in second part')
+
       // modify recipient's balance
       await appDataSource
         .createQueryBuilder()
