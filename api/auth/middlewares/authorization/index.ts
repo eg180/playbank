@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../../../config/secrets");
 
 module.exports = async (req: any, res: any, next: any) => {
-  const { clientId } = req.query;
+  // const { clientId } = req.query;
   const { authorization } = req.headers;
     const token = authorization;
 
@@ -14,7 +14,6 @@ module.exports = async (req: any, res: any, next: any) => {
         }
         req.jwtSub = decodedToken.sub;
     })
-  
   
   
   next();

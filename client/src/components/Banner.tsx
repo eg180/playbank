@@ -53,12 +53,15 @@ const Banner = () => {
                     <span id="sub-logo">As Good As Money</span>
                 </div>
             </Link>
-
-            {JSON.stringify(user)}
             <nav>
                 <Link to={'/sendmoney'}>
                     <StyledNavButton bgColor={'#41ead4'} color="black">
                         Send IOU 🏎
+                    </StyledNavButton>
+                </Link>
+                <Link to={'/dashboard'}>
+                    <StyledNavButton bgColor={'#41ead4'} color="black">
+                        My Dashboard
                     </StyledNavButton>
                 </Link>
                 {user === undefined && (

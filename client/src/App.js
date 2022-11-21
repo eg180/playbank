@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import GlobalStyle from './globalStyles';
+import { ToastContainer } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
+import GlobalStyle from './globalStyles';
 import Banner from './components/Banner';
 import LandingPage from './components/LandingPage.tsx';
 import Dashboard from './components/Dashboard';
@@ -11,6 +13,7 @@ function App() {
     return (
         <>
             <GlobalStyle />
+            <ToastContainer />
             <Banner />
             <Routes>
                 <Route path="/" element={<LandingPage />} />

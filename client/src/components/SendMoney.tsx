@@ -1,4 +1,8 @@
 import React, {useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import Balance from './Balance';
 
 import { StyledSendMoney } from '../styles/SendMoney.style';
 import { StyledNavButton } from '../styles/NavButton.style';
@@ -6,6 +10,7 @@ import axios from 'axios';
 
 
 const SendMoney = () => {
+    const navigate = useNavigate();
     const sendToRef = useRef<HTMLInputElement>(null);
     const amountRef = useRef<HTMLInputElement>(null);
 
@@ -20,10 +25,42 @@ const SendMoney = () => {
                 transferred_to: sendToRef?.current?.value
             };
             try {
-            const res = await axios.post(`http://localhost:5000/api/auth/client/transaction/create/:clientId`, payload, {params: {clientId: 1}, headers: headerForPost});
-            console.log(res.data);
+            await axios.post(`http://localhost:5000/api/auth/client/transaction/create/:clientId`, payload, {headers: headerForPost});
+            toast.success(`Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+                navigate('/');
             } catch (error) {
-                console.log(error);
+                if (error.response.data) {
+                    toast.warning(`Insufficient IOU funds.`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        });
+                } else {
+                    toast.error(`Something went wrong :(`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        });
+                }
             }
         };
 		
@@ -32,14 +69,14 @@ const SendMoney = () => {
     };
     return (
         <StyledSendMoney>
-           <main id="form-container">
-            
+           <div id="form-container">
            <form onSubmit={handleSubmit}>
-            <input ref={sendToRef} type="text" placeholder="Send to: (ID)" />
+           <Balance />
             <input ref={amountRef} type="text" placeholder='Amount'/>
+            <input ref={sendToRef} type="text" placeholder="Send to: (ID)" />
             <StyledNavButton type="submit" color='white' bgColor="black">Submit</StyledNavButton>
            </form>
-           </main>
+           </div>
            
         </StyledSendMoney>
     );
