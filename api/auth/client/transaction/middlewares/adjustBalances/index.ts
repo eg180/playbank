@@ -17,12 +17,17 @@ module.exports = async (req: any, res: any, next: any) => {
   });
   // save to db
   try {
+    console.log('you are here trying to save this transaction', transaction);
     await transaction.save();
   } catch (error) {
+    console.log(error);
     return res
       .status(401)
       .json({ error: "Error saving transaction to database." });
   }
+  
+  // adjust balances after saving the transaction
+
   if (type === TransactionTypes.DEPOSIT) {
     try {
       // modify originator's balance

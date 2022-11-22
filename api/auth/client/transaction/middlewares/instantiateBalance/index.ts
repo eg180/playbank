@@ -2,10 +2,7 @@ import { appDataSource } from "../../../../../../api/dbconfig"
 import { Balance } from "../../../../../src/entities/Balance";
 
 module.exports = async (req: any, res: any, next: any) => {
-  const { client_id } = req.body;
-
-
-
+console.log('do you freakin see req.clientId??', req.clientId);
 // set new account balance to zero
   try {
     appDataSource
@@ -13,7 +10,7 @@ module.exports = async (req: any, res: any, next: any) => {
     .insert()
     .into(Balance)
     .values([
-      {client: client_id, balance: 0}
+      {client: req.clientId, balance: 0}
     ])
     .execute();
     next();

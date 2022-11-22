@@ -1,7 +1,8 @@
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
     WITHDRAW = 'withdraw',
-    TRANSFER = 'transfer'
+    TRANSFER = 'transfer',
+    REMINDER = 'reminder'
 }
 
 interface BaseTransactionInterface {

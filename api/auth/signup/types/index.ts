@@ -4,4 +4,5 @@ export interface SignUpInterface  {
     email: string;
     password: string;
     client_id?: any;
+    newId?: any;
 }

@@ -8,13 +8,15 @@ module.exports = async (req: any, res: any, next: any) => {
     const sender = await Balance.findOneBy({
       id: clientId
     }) ?? {balance: 0};
+  console.log('moving on to next with this sender', sender);
+  console.log('transactin type', type);
   if (type !== TransactionTypes.DEPOSIT && (sender.balance < amount)) {
     return res.status(403).json({message: "insufficient funds."})
   }
   } catch (error) {
     return console.log('there was an error', error)
   }
- 
+  console.log('going to next')
   next();
 };
 
