@@ -23,3 +23,8 @@ export interface TransferInterface extends BaseTransactionInterface {
     transferred_to: number;
     received_from: number;
 }
+
+export interface ReminderInterface extends BaseTransactionInterface {
+    type: TransactionTypes.REMINDER;
+    memo: string;
+}

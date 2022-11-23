@@ -32,7 +32,6 @@ module.exports = async (req: {clientId: number, body: SignUpInterface }, res: { 
             .execute();
             next();
           } catch (error) {
-            console.log('Unable to initialize balance.')
             return res.status(401).json({error: 'Unable to initialize balance.'})
           }
         }).catch(err => {

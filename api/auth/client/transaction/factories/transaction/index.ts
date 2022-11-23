@@ -2,9 +2,9 @@ import { TransactionTypes } from '../../../../../types/common'
 export const getObjectForTransaction = (reqBod: {
     type: string;
     amount: number;
-    transferred_to: number | undefined;
-    memo: string | undefined;
-  }, clientId: number) => {
+    transferred_to?: number | undefined;
+    memo?: string | undefined;
+  }, clientId?: number) => {
     const { type, amount, transferred_to, memo } = reqBod;
     const originator_id = clientId;
     const generatedObj =
@@ -20,7 +20,8 @@ export const getObjectForTransaction = (reqBod: {
         ? { type: TransactionTypes.DEPOSIT, amount, client_id: originator_id }
         : type === TransactionTypes.WITHDRAW
         ? { type: TransactionTypes.WITHDRAW, amount, client_id: originator_id }
-        : { type: TransactionTypes.REMINDER, client_id: originator_id, memo };
+        : { amount, memo, client: clientId };
+        // for some reason, it automatically appends the memo / very curious
 
     return generatedObj;
   };
