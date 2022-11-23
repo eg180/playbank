@@ -25,7 +25,8 @@ export class Memo extends BaseEntity {
     memo: string;
 
     @Column({
-        type: 'boolean'
+        type: 'boolean',
+        default: false
     })
     done: boolean;
 
