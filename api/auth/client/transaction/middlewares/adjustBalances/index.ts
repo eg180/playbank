@@ -19,6 +19,7 @@ module.exports = async (req: any, res: any, next: any) => {
       await memo.save();
       next();
     } catch (error) {
+      console.log(error);
       return res
         .status(401)
         .json({ error: "Error saving transaction to database." });

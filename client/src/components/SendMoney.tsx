@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -8,76 +8,99 @@ import { StyledSendMoney } from '../styles/SendMoney.style';
 import { StyledNavButton } from '../styles/NavButton.style';
 import axios from 'axios';
 
-
 const SendMoney = () => {
+    const [isMemo, setIsMemo] = useState<any>(false);
+    const [showMemoInput, setShowMemoInput] = useState<any>(false);
     const navigate = useNavigate();
     const sendToRef = useRef<HTMLInputElement>(null);
     const amountRef = useRef<HTMLInputElement>(null);
+    const memoRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+
+    const toggleChecked = ()  => {
+        setIsMemo(!isMemo)
+        setShowMemoInput(!showMemoInput)
+    };
+
+    const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        let token: string = JSON.parse(sessionStorage.getItem("sesh")) ?? 'notfound';
+        console.log(isMemo);
+
+        let token: string | null = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
         if (token !== 'notfound') {
             const headerForPost = { Authorization: `${token}` };
-            const payload = {
-                type: "transfer",
+            const payload = isMemo ? {
+                type: 'reminder',
                 amount: amountRef?.current?.value,
-                transferred_to: sendToRef?.current?.value
+                memo: memoRef?.current?.value
+            } : {
+                type: 'transfer',
+                amount: amountRef?.current?.value,
+                transferred_to: sendToRef?.current?.value,
             };
             try {
-            await axios.post(`http://localhost:5000/api/auth/client/transaction/create/:clientId`, payload, {headers: headerForPost});
-            toast.success(`Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
+                await axios.post(`http://localhost:5000/api/auth/client/transaction/create/:clientId`, payload, {
+                    headers: headerForPost,
                 });
+                const toastMessage = isMemo ? "IOU reminder created!" : `Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`;
+                toast.success(
+                    toastMessage,
+                    {
+                        position: 'top-center',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: 'light',
+                    },
+                );
                 navigate('/');
             } catch (error) {
                 if (error.response.data) {
                     toast.warning(`Insufficient IOU funds.`, {
-                        position: "top-center",
+                        position: 'top-center',
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        theme: "light",
-                        });
+                        theme: 'light',
+                    });
                 } else {
                     toast.error(`Something went wrong :(`, {
-                        position: "top-center",
+                        position: 'top-center',
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        theme: "light",
-                        });
+                        theme: 'light',
+                    });
                 }
             }
-        };
-		
-
-       
+        }
     };
     return (
         <StyledSendMoney>
-           <div id="form-container">
-           <form onSubmit={handleSubmit}>
-           <Balance />
-            <input ref={amountRef} type="text" placeholder='Amount'/>
-            <input ref={sendToRef} type="text" placeholder="Send to: (ID)" />
-            <StyledNavButton type="submit" color='white' bgColor="black">Submit</StyledNavButton>
-           </form>
-           </div>
-           
+            <div id="form-container">
+                <form onSubmit={handleSubmit}>
+                    <Balance />
+                    <input ref={amountRef} type="text" placeholder="Amount" />
+                    <label>Reminder Only 📝
+                    <input type="checkbox" checked={isMemo} onChange={toggleChecked} />
+                    </label>
+                    {!isMemo && <input ref={sendToRef} type="text" placeholder="Send to: (ID)" />}
+                    {isMemo && 
+                    <input ref={memoRef} type="text" placeholder="Memo" />}                    
+                    <StyledNavButton type="submit" color="white" bgColor="black">
+                        Submit
+                    </StyledNavButton>
+                </form>
+            </div>
         </StyledSendMoney>
     );
 };

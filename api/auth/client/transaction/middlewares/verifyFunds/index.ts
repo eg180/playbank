@@ -14,6 +14,7 @@ module.exports = async (req: any, res: any, next: any) => {
   } catch (error) {
     return console.log('there was an error', error)
   }
+  console.log('do we at least hit that next?')
   next();
 };
 

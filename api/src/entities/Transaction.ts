@@ -31,11 +31,6 @@ export class Transaction extends BaseEntity {
         () => Client,
         client => client.transactions
     )
-
-    @ManyToOne(
-        () => Client,
-        client => client.transactions
-    )
     @JoinColumn({
         name: 'sender_user_id'
     })
