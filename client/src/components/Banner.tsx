@@ -18,7 +18,6 @@ const Banner = () => {
 
     const handleInputToggle = (toggleOption: ToggleOptions) => {
         if (toggleOption === ToggleOptions.SignUp) {
-            console.log('in sign up');
             setShowSignIn(false);
             setShowCreateAccount(true);
             return;

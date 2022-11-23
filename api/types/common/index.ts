@@ -1,7 +1,8 @@
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
     WITHDRAW = 'withdraw',
-    TRANSFER = 'transfer'
+    TRANSFER = 'transfer',
+    REMINDER = 'reminder'
 }
 
 interface BaseTransactionInterface {
@@ -21,4 +22,9 @@ export interface TransferInterface extends BaseTransactionInterface {
     type: TransactionTypes.TRANSFER;
     transferred_to: number;
     received_from: number;
+}
+
+export interface ReminderInterface extends BaseTransactionInterface {
+    type: TransactionTypes.REMINDER;
+    memo: string;
 }

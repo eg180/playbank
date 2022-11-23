@@ -10,8 +10,6 @@ const router = express.Router();
 router.post('/add', async (req, res) => {
     const { clientId, futureFriendId } = req.body;
 
-    console.log(clientId, futureFriendId);
-
     const futureFriend = await Client.findOneBy({
         id: futureFriendId
     });

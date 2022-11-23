@@ -1,5 +1,5 @@
 import { Client } from "./Client";
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { TransactionTypes } from "../../types/common"
 
 
@@ -31,6 +31,11 @@ export class Transaction extends BaseEntity {
         () => Client,
         client => client.transactions
     )
+
+    @ManyToOne(
+        () => Client,
+        client => client.transactions
+    )
     @JoinColumn({
         name: 'sender_user_id'
     })
@@ -50,6 +55,18 @@ export class Transaction extends BaseEntity {
         client => client.friends
     )
 
+    @Column({
+        type: "timestamptz",
+        nullable: true,
+    })
+    reminder_date: Date;
+
+
+    @Column({
+        type: "timestamptz",
+        nullable: true,
+    })
+    due_date: Date;
     
 
     @CreateDateColumn()

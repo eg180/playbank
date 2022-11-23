@@ -6,16 +6,15 @@ module.exports = async (req: any, res: any, next: any) => {
   const { type, amount } = req.body;
   try {
     const sender = await Balance.findOneBy({
-      id: clientId
+      client: clientId
     }) ?? {balance: 0};
-  if (type !== TransactionTypes.DEPOSIT && (sender.balance < amount)) {
+  if ((type === TransactionTypes.WITHDRAW || type === TransactionTypes.TRANSFER) && (sender.balance < amount)) {
     return res.status(403).json({message: "insufficient funds."})
   }
   } catch (error) {
     return console.log('there was an error', error)
   }
- 
   next();
 };
 
-// this middleware ensures that the sender has enough to cover a transfer
+// this middleware ensures that the sender has enough to cover a withdraw or transfer

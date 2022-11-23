@@ -1,7 +1,8 @@
 import { Banker } from './Banker';
 import { Transaction } from './Transaction';
-import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Person } from './Person';
+import { Memo } from './Memo';
 
 @Entity('clients')
 export class Client extends Person {
@@ -13,6 +14,12 @@ export class Client extends Person {
         transaction => transaction.client
     )
     transactions: Transaction[];
+
+    @OneToMany(
+        () => Memo,
+        memo => memo.client
+    )
+    memos: Memo[];
 
     @ManyToMany(
         () => Banker

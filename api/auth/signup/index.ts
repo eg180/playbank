@@ -9,7 +9,7 @@ const router = express.Router();
 // router.use(cors());
 
 
-router.post('/', hashPassword, instanstiateBalance, (_req, res, next) => {
+router.post('/', hashPassword, (_req, res, next) => {
     return res.status(201).json({success: "ok"})
 });
 
