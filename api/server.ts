@@ -10,6 +10,7 @@ const bankerRouter = require("./auth/banker");
 const transactionRouter = require("./auth/client/transaction");
 const friendRouter = require("./auth/friend");
 const balanceRouter = require("./auth/client/balance");
+const memoRouter = require("./auth/memo");
 
 
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/auth/banker", bankerRouter);
 app.use("/api/auth/client/transaction", transactionRouter);
 app.use("/api/auth/friend", friendRouter);
 app.use("/api/auth/client/balance", balanceRouter);
+app.use("/api/auth/memo", memoRouter);
 
 
 
