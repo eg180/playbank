@@ -13,10 +13,6 @@ module.exports = async (req: any, res: any, next: any) => {
             return res.status(401).json('Error decoding token.')
         }
         req.jwtSub = decodedToken.sub;
+        next();
     })
-  
-  
-  next();
-};
-
-// this middleware ensures that the sender has enough to cover a transfer
+  };
