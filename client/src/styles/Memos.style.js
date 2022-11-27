@@ -20,4 +20,5 @@ export const StyledMemo = styled.div`
     #memo-amount {
         color: #bb3e03;
     }
+    z-index: 1;
 `
