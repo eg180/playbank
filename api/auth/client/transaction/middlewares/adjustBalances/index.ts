@@ -66,7 +66,7 @@ module.exports = async (req: any, res: any, next: any) => {
           .set({ balance: () => `balance + ${transaction.amount}` })
           .where(`client = ${clientId}`, { client: clientId })
           .execute();
-        next();
+          next();
       } catch (error) {
         return res.status(401).json({ error: "Error depositing funds." });
       }

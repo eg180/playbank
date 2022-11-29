@@ -6,6 +6,7 @@ import { Transaction } from "../../../src/entities/Transaction";
 const adjustBalances = require("./middlewares/adjustBalances")
 const verifyFunds = require("./middlewares/verifyFunds");
 const verifyAuthorization = require("../../../auth/middlewares/authorization")
+const getBalance = require('../middlewares/getBalance');
 
 const router = express.Router();
 
@@ -23,8 +24,7 @@ router.get("/:clientId", async (req, res) => {
   }
 });
 
-router.post("/create/:clientId", verifyAuthorization,verifyFunds, adjustBalances, async (req, res) => {
-  res.status(201).json({message: "ok"});
+router.post("/create", verifyAuthorization, verifyFunds, adjustBalances, getBalance, async (req, res) => {
 });
 
 module.exports = router;
