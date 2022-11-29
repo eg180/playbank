@@ -24,7 +24,6 @@ const SendMoney = () => {
 
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        console.log(isMemo);
 
         let token: string | null = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
         if (token !== 'notfound') {
@@ -39,7 +38,7 @@ const SendMoney = () => {
                 transferred_to: sendToRef?.current?.value,
             };
             try {
-                await axios.post(`http://localhost:5000/api/auth/client/transaction/create/:clientId`, payload, {
+                await axios.post(`http://localhost:5000/api/auth/client/transaction/create`, payload, {
                     headers: headerForPost,
                 });
                 const toastMessage = isMemo ? "IOU reminder created!" : `Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`;
