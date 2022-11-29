@@ -14,9 +14,9 @@ export class Memo extends BaseEntity {
     )
     // join to client_id -- the primary key - in the above Client entity
     @JoinColumn({
-        name: 'client_id'
+        referencedColumnName: 'id'
     })
-    client: Client;
+    client: Client['id'];
 
     @Column({
         type: 'varchar',

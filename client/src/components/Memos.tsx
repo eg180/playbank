@@ -54,7 +54,7 @@ const Memos = () => {
         <StyledMemo>
             <span id="memo-count" onClick={toggleShowItems}>
                 {' '}
-                ⏰ {memos.length}
+                ⏰ {memos?.length}
             </span>
             {JSON.stringify(selectedMemos)}
             {showItems && (
