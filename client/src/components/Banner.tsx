@@ -55,7 +55,7 @@ const Banner = (props) => {
             <nav>
                 <Link to={'/sendmoney'}>
                     <StyledNavButton bgColor={'#41ead4'} color="black">
-                        Send IOU 🏎
+                        New IOU 🏎
                     </StyledNavButton>
                 </Link>
                 <Link to={'/dashboard'}>

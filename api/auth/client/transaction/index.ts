@@ -7,21 +7,11 @@ const adjustBalances = require("./middlewares/adjustBalances")
 const verifyFunds = require("./middlewares/verifyFunds");
 const verifyAuthorization = require("../../../auth/middlewares/authorization")
 const getBalance = require('../middlewares/getBalance');
+const getTransactions = require('./middlewares/getTransactions');
 
 const router = express.Router();
 
-router.get("/:clientId", async (req, res) => {
-  const { clientId } = req.query;
-  try {
-    const results = await appDataSource
-      .getRepository(Transaction)
-      .createQueryBuilder("transaction")
-      .where({ client: clientId })
-      .getMany();
-    return res.status(200).json(results);
-  } catch (error) {
-    return res.status(401).json({ error: "something went wrong" });
-  }
+router.get("/", verifyAuthorization, getTransactions, async (req, res) => {
 });
 
 router.post("/create", verifyAuthorization, verifyFunds, adjustBalances, getBalance, async (req, res) => {
