@@ -3,6 +3,10 @@ import axios from 'axios';
 import { StyledMemo } from '../styles/Memos.style';
 import { StyledNavButton } from '../styles/NavButton.style';
 
+export const refreshMemos = () => {
+
+}
+
 const Memos = () => {
     const [memos, setMemos] = useState([]);
     const [selectedMemos, setSelectedMemos] = useState<string[]>([]);
@@ -46,6 +50,7 @@ const Memos = () => {
             console.log(error);
         }
     };
+
     useEffect(() => {
         getMemos();
     }, []);
@@ -56,7 +61,6 @@ const Memos = () => {
                 {' '}
                 ⏰ {memos?.length}
             </span>
-            {JSON.stringify(selectedMemos)}
             {showItems && (
                 <ul>
                     {memos.map((memo: any) => {

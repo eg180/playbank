@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -12,13 +13,18 @@ import Footer from "./components/Footer";
 
 
 function App() {
+    const [showMemos, setShowMemos] = useState(false);
+
+    const refreshMemos = () => {
+        setShowMemos(true);
+    }
     
     return (
         <>
             <GlobalStyle />
             <ToastContainer />
-            <Memos />
-            <Banner />
+            {showMemos && <Memos />}
+            <Banner refreshMemos={refreshMemos} />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
