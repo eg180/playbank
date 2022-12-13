@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledBalance = styled.div`
+export const StyledTransactionHistory = styled.div`
     font-size: 1.50rem;
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.35);
     border-radius: 16px;
@@ -10,13 +11,24 @@ export const StyledBalance = styled.div`
     backdrop-filter: blur(3.1px);
     -webkit-backdrop-filter: blur(3.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    #balance-title {
+    #transaction-title {
         font-weight: 700;
     }
-    #balance {
+    #transactions {
+        display: flex;
+        flex-direction: column;
         filter: none;
+    }
+    .transaction-type {
+        font-size: 1rem;
     }
     #balance-blur {
         filter: blur(.45em);
     }
 `;
+
+export const StyledTransactionLine = styled.span`
+    background-color: ${props => (props?.bgColor)};
+    padding: .5rem;
+    margin: .5rem;
+`

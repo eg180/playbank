@@ -21,7 +21,6 @@ export const getObjectForTransaction = (reqBod: {
         : type === TransactionTypes.WITHDRAW
         ? { type: TransactionTypes.WITHDRAW, amount, client_id: originator_id }
         : { amount, memo, client: clientId };
-        // for some reason, it automatically appends the memo / very curious
 
     return generatedObj;
   };

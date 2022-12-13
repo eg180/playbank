@@ -88,7 +88,7 @@ const SendMoney = () => {
             <div id="form-container">
                 <form onSubmit={handleSubmit}>
                     <Balance />
-                    <input ref={amountRef} type="text" placeholder="Amount" />
+                    <input ref={amountRef} type="text" placeholder="$" />
                     <label>Reminder Only 📝
                     <input type="checkbox" checked={isMemo} onChange={toggleChecked} />
                     </label>
@@ -96,7 +96,7 @@ const SendMoney = () => {
                     {isMemo && 
                     <input ref={memoRef} type="text" placeholder="Memo" />}                    
                     <StyledNavButton type="submit" color="white" bgColor="black">
-                        Submit
+                        Send IOU
                     </StyledNavButton>
                 </form>
             </div>
