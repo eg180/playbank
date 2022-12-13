@@ -5,7 +5,8 @@ import LoginDropDown from './LoginDropDown';
 import CreateAccountDropDown from './CreateAccountDropDown';
 import { StyledNavButton } from '../styles/NavButton.style';
 
-const Banner = () => {
+const Banner = (props) => {
+    const { refreshMemos } = props;
     const [showSignIn, setShowSignIn] = useState<boolean>(false);
     const [showCreateAccount, setShowCreateAccount] = useState<boolean>(false);
     const [user, setUser] = useState<string | undefined>(undefined);
@@ -40,7 +41,6 @@ const Banner = () => {
     };
 
     useEffect(() => {
-        console.log('setting user data to this', getUserData());
         setUser(getUserData());
     }, [user]);
 
@@ -107,7 +107,7 @@ const Banner = () => {
             {user === undefined && (
                 <div id="inputs">
                     {showCreateAccount && <CreateAccountDropDown setShowCreateAccount={setShowCreateAccount} />}
-                    {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} setUser={setUser} />}
+                    {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} refreshMemos={refreshMemos} setUser={setUser} />}
                 </div>
             )}
         </StyledBanner>

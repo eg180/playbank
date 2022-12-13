@@ -4,7 +4,7 @@ import axios from 'axios';
 import { StyledSignInSignUpInput } from '../styles/LoginDropDown.style';
 
 const LoginDropDown = (props) => {
-    const { setShowSignIn, setUser } = props;
+    const { setShowSignIn, setUser, refreshMemos } = props;
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const navigate = useNavigate();
@@ -21,6 +21,7 @@ const LoginDropDown = (props) => {
             sessionStorage.setItem("sesh", JSON.stringify(res.data.token))
             setUser(JSON.stringify(res.data.token));
             navigate('/dashboard')
+            refreshMemos();
         }).catch(err => {
             console.log(err);
         });
