@@ -8,7 +8,8 @@ import { StyledSendMoney } from '../styles/SendMoney.style';
 import { StyledNavButton } from '../styles/NavButton.style';
 import axios from 'axios';
 
-const SendMoney = () => {
+const SendMoney = (props: {refreshMemos: () => void}) => {
+    const { refreshMemos } = props;
     const [isMemo, setIsMemo] = useState<any>(false);
     const [showMemoInput, setShowMemoInput] = useState<any>(false);
     const navigate = useNavigate();
@@ -56,6 +57,7 @@ const SendMoney = () => {
                     },
                 );
                 navigate('/');
+                refreshMemos();
             } catch (error) {
                 if (error.response.data) {
                     toast.warning(`Insufficient IOU funds.`, {

@@ -14,21 +14,27 @@ import Footer from "./components/Footer";
 
 function App() {
     const [showMemos, setShowMemos] = useState(false);
+    const [refreshPage, setRefreshPage] = useState(false);
 
     const refreshMemos = () => {
-        setShowMemos(true);
-    }
+        if (showMemos === false) {
+           return setShowMemos(true); 
+        }
+        return setRefreshPage(!refreshPage)
+        
+    };
+    
     
     return (
         <>
             <GlobalStyle />
             <ToastContainer />
-            {showMemos && <Memos />}
+            {showMemos && <Memos refreshMemos={refreshMemos} />}
             <Banner refreshMemos={refreshMemos} />
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/sendmoney" element={<SendMoney />} />
+                <Route path="/sendmoney" element={<SendMoney refreshMemos={refreshMemos} />} />
             </Routes>
             <Footer />
         </>

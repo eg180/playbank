@@ -3,11 +3,9 @@ import axios from 'axios';
 import { StyledMemo } from '../styles/Memos.style';
 import { StyledNavButton } from '../styles/NavButton.style';
 
-export const refreshMemos = () => {
 
-}
-
-const Memos = () => {
+const Memos = (props: {refreshMemos: () => void}) => {
+    const { refreshMemos } = props;
     const [memos, setMemos] = useState([]);
     const [selectedMemos, setSelectedMemos] = useState<string[]>([]);
     const [showItems, setShowItems] = useState(false);
@@ -36,6 +34,7 @@ const Memos = () => {
             const updatedIds = selectedMemos.filter((id) => id !== e.target.id);
             setSelectedMemos(updatedIds);
         }
+        refreshMemos();
     };
 
     const getMemos = async () => {
@@ -53,7 +52,7 @@ const Memos = () => {
 
     useEffect(() => {
         getMemos();
-    }, []);
+    }, [refreshMemos]);
 
     return (
         <StyledMemo>
