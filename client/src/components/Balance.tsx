@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import BASEURL from '../utilities/BASEURL';
 import { StyledBalance } from '../styles/Balance.style'
 
 
@@ -13,7 +14,7 @@ const Balance = () => {
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
-            const res = await axios.get(`http://localhost:5000/api/auth/client/balance`,  {headers: header});
+            const res = await axios.get(`${BASEURL}/api/auth/client/balance`,  {headers: header});
             console.log(res.data);
             setBalance(res.data.balance.balance);
             } catch (error) {
