@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import BASEURL from '../utilities/BASEURL';
 import { StyledMemo } from '../styles/Memos.style';
 import { StyledNavButton } from '../styles/NavButton.style';
 
@@ -19,12 +20,13 @@ const Memos = (props: {refreshMemos: () => void}) => {
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
-                const remainingMemos = await axios.delete(`http://localhost:5000/api/auth/memo`, { headers: header, data: selectedMemos });
+                const remainingMemos = await axios.delete(`${BASEURL}/api/auth/memo`, { headers: header, data: selectedMemos });
                 setMemos(remainingMemos.data);
             } catch (error) {
                 console.log(error);
             }
         }
+        refreshMemos();
     };
 
     const addToSelectedMemos = (e: { target: { id: string } }) => {
@@ -42,7 +44,7 @@ const Memos = (props: {refreshMemos: () => void}) => {
             let token: string = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
             if (token !== 'notfound') {
                 const header = { Authorization: `${token}` };
-                const res = await axios.get(`http://localhost:5000/api/auth/memo`, { headers: header });
+                const res = await axios.get(`${BASEURL}/api/auth/memo`, { headers: header });
                 setMemos(res.data.memos);
             }
         } catch (error) {
