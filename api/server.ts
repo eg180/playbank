@@ -2,6 +2,7 @@
 import express from 'express';
 import {appDataSource} from './dbconfig';
 
+const path = require('path');
 const cors = require('cors')
 const signInRouter = require("./auth/login");
 const signUpRouter = require("./auth/signup");
@@ -17,7 +18,7 @@ const app = express();
 
 app.use(cors());
 
-var allowedOrigins = ['http://localhost:3000', 'http://192.168.1.88:3000'];
+var allowedOrigins = ['http://localhost:3000', 'http://192.168.1.88:3000', 'https://asgoodasmoney.herokuapp.com', 'http://asgoodasmoney.herokuapp.com'];
 app.use(cors({
   origin: function(origin: string, callback: (arg0: Error | null, arg1: boolean) => any){
     // allow requests with no origin 
@@ -43,6 +44,21 @@ app.use("/api/auth/client/transaction", transactionRouter);
 app.use("/api/auth/friend", friendRouter);
 app.use("/api/auth/client/balance", balanceRouter);
 app.use("/api/auth/memo", memoRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+
+  app.get('/', (_, res) => {
+
+      // if you want to serve a SPA using Express you totally can!
+      res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  //   res.json({ api: "up"})
+})
+  
+  // server.use("/api/*", (__, res) => {
+  //   res.json({ api: "up"})
+  // })
+}
 
 
 

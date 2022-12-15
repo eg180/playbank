@@ -2,6 +2,7 @@
   "name": "playbank",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -26,11 +27,14 @@
   },
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' api/server.ts",
-    "start": "node index.ts",
+    "start": "api/server.ts",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "cd client && npm i && npm run build"
+  },
+  "engines": {
+    "node": "^12.20.0 || >=14.13.1"
   },
   "eslintConfig": {
     "extends": [
@@ -51,7 +55,7 @@
     ]
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.ts",
+  "exports": "./index.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
