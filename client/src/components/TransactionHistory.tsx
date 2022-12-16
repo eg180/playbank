@@ -24,7 +24,6 @@ const TransactionHistory = () => {
             const header = { Authorization: `${token}` };
             try {
                 const res = await axios.get(`${BASEURL}/auth/client/transaction`, { headers: header });
-                console.log(res.data);
                 setTransactions(res.data);
             } catch (error) {
                 console.log(error);
@@ -41,7 +40,7 @@ const TransactionHistory = () => {
                 {transactions.map((transaction: any, index) => {
                     return (
                         <StyledTransactionLine className={'transaction-line'} bgColor={index % 2 === 0 ? '#809bce' : '#95b8d1'}>
-                            <span className={'transaction-type'}>{TransactionTypeTextEnum[transaction.type]}</span>
+                            <span className={'transaction-type'}>{transaction.type}</span>
                             {getIcon(transaction.type)} ${transaction.amount}
                         </StyledTransactionLine>
                     );
