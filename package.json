@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' server.ts",
     "postinstall": "tsc",
-    "start": "node server.ts",
+    "start": "ts-node server.ts",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
