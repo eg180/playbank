@@ -1,4 +1,4 @@
-import { appDataSource } from "../../../../../../api/dbconfig"
+import { appDataSource } from "../../../../../dbconfig"
 import { Balance } from "../../../../../src/entities/Balance";
 
 module.exports = async (req: any, res: any, next: any) => {

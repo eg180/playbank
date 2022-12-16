@@ -37,14 +37,14 @@ app.use(cors({
 // middleware
 app.use(express.json());
 // routes
-app.use("/api/auth/login", signInRouter);
-app.use("/api/auth/signup", signUpRouter);
-app.use("/api/auth/client", clientRouter);
-app.use("/api/auth/banker", bankerRouter);
-app.use("/api/auth/client/transaction", transactionRouter);
-app.use("/api/auth/friend", friendRouter);
-app.use("/api/auth/client/balance", balanceRouter);
-app.use("/api/auth/memo", memoRouter);
+app.use("/auth/login", signInRouter);
+app.use("/auth/signup", signUpRouter);
+app.use("/auth/client", clientRouter);
+app.use("/auth/banker", bankerRouter);
+app.use("/auth/client/transaction", transactionRouter);
+app.use("/auth/friend", friendRouter);
+app.use("/auth/client/balance", balanceRouter);
+app.use("/auth/memo", memoRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')))

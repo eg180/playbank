@@ -2,7 +2,7 @@ import { Client } from "../../../src/entities/Client";
 import { LoginInterface } from "../types";
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { jwtSecret } = require("../../../../api/config/secrets");
+const { jwtSecret } = require("../../../config/secrets");
 
 module.exports = async (
   req: { body: LoginInterface; jwt: any },

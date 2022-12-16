@@ -22,7 +22,7 @@ const TransactionHistory = () => {
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
-                const res = await axios.get(`${BASEURL}/api/auth/client/transaction`, { headers: header });
+                const res = await axios.get(`${BASEURL}/auth/client/transaction`, { headers: header });
                 console.log(res.data);
                 setTransactions(res.data);
             } catch (error) {

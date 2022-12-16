@@ -17,7 +17,7 @@ const LoginDropDown = (props) => {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
-        await axios.post(`${BASEURL}/api/auth/login`, signInObject).then(res => {
+        await axios.post(`${BASEURL}/auth/login`, signInObject).then(res => {
             console.log(res)
             sessionStorage.setItem("sesh", JSON.stringify(res.data.token))
             setUser(JSON.stringify(res.data.token));

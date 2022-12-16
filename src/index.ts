@@ -24,8 +24,8 @@ appDataSource.initialize()
 app.use(express.json());
 
 // routes
-app.use("/api/auth/client", clientRouter);
-app.use("/api/auth/banker", bankerRouter);
-app.use("/api/auth/client/transaction", transactionRouter);
+app.use("/auth/client", clientRouter);
+app.use("/auth/banker", bankerRouter);
+app.use("/auth/client/transaction", transactionRouter);
 
 

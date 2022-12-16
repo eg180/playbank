@@ -30,5 +30,5 @@
 		"baseUrl": "."
 	},
 	"exclude": ["node_modules"],
-	"include": ["./api/src/**/*.tsx", "./api/src/**/*.ts"]
+	"include": ["./src/**/*.tsx", "./src/**/*.ts"]
 }

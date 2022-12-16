@@ -20,7 +20,7 @@ const Memos = (props: {refreshMemos: () => void}) => {
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
-                const remainingMemos = await axios.delete(`${BASEURL}/api/auth/memo`, { headers: header, data: selectedMemos });
+                const remainingMemos = await axios.delete(`${BASEURL}/auth/memo`, { headers: header, data: selectedMemos });
                 setMemos(remainingMemos.data);
             } catch (error) {
                 console.log(error);
@@ -44,7 +44,7 @@ const Memos = (props: {refreshMemos: () => void}) => {
             let token: string = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
             if (token !== 'notfound') {
                 const header = { Authorization: `${token}` };
-                const res = await axios.get(`${BASEURL}/api/auth/memo`, { headers: header });
+                const res = await axios.get(`${BASEURL}/auth/memo`, { headers: header });
                 setMemos(res.data.memos);
             }
         } catch (error) {

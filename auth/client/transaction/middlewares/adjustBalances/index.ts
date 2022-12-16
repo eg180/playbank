@@ -1,4 +1,4 @@
-import { appDataSource } from "../../../../../../api/dbconfig";
+import { appDataSource } from "../../../../../dbconfig";
 import { Balance } from "../../../../../src/entities/Balance";
 import { Transaction } from "../../../../../src/entities/Transaction";
 import { Memo } from "../../../../../src/entities/Memo";

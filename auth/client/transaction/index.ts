@@ -1,6 +1,4 @@
 import express from "express";
-import { appDataSource } from "../../../../api/dbconfig";
-import { Transaction } from "../../../src/entities/Transaction";
 
 // middleware
 const adjustBalances = require("./middlewares/adjustBalances")

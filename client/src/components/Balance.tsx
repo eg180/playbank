@@ -14,7 +14,7 @@ const Balance = () => {
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
-            const res = await axios.get(`${BASEURL}/api/auth/client/balance`,  {headers: header});
+            const res = await axios.get(`${BASEURL}/auth/client/balance`,  {headers: header});
             console.log(res.data);
             setBalance(res.data.balance.balance);
             } catch (error) {

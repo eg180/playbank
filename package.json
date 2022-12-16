@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' api/server.ts",
+    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' server.ts",
     "postinstall": "tsc",
     "start": "server.ts",
     "build": "react-scripts build",
