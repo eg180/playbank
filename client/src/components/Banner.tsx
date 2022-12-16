@@ -5,7 +5,7 @@ import LoginDropDown from './LoginDropDown';
 import CreateAccountDropDown from './CreateAccountDropDown';
 import { StyledNavButton } from '../styles/NavButton.style';
 
-const Banner = (props) => {
+const Banner = (props: {refreshMemos: () => void;}) => {
     const { refreshMemos } = props;
     const [showSignIn, setShowSignIn] = useState<boolean>(false);
     const [showCreateAccount, setShowCreateAccount] = useState<boolean>(false);
