@@ -18,7 +18,8 @@ const TransactionHistory = () => {
     }
 
     const getTransactionHistory = async () => {
-        let token: string = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
+        const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
+        const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {

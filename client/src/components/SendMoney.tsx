@@ -26,7 +26,8 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
-        let token: string | null = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
+        const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
+        const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const headerForPost = { Authorization: `${token}` };
             const payload = isMemo ? {

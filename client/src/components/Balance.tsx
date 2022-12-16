@@ -10,7 +10,8 @@ const Balance = () => {
   const [balance, setBalance] = useState<number>(0);
 
   const getBalance = async () => {
-    let token: string = JSON.parse(sessionStorage.getItem("sesh")) ?? 'notfound';
+    const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
+    const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {

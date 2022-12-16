@@ -16,7 +16,8 @@ const Memos = (props: {refreshMemos: () => void}) => {
     };
 
     const handleDeleteMemo = async () => {
-        let token: string = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
+        const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
+        const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
@@ -41,7 +42,8 @@ const Memos = (props: {refreshMemos: () => void}) => {
 
     const getMemos = async () => {
         try {
-            let token: string = JSON.parse(sessionStorage.getItem('sesh')) ?? 'notfound';
+            const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
+            const token: string = JSON.parse(sessionToken);
             if (token !== 'notfound') {
                 const header = { Authorization: `${token}` };
                 const res = await axios.get(`${BASEURL}/auth/memo`, { headers: header });
