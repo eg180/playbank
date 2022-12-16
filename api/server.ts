@@ -1,5 +1,6 @@
 
 import express from 'express';
+import {config} from './src/config/config';
 import {appDataSource} from './dbconfig';
 
 const path = require('path');
@@ -65,7 +66,7 @@ if (process.env.NODE_ENV === 'production') {
 appDataSource.initialize()
 .then(() => {
   console.log("Data Source has been initialized!");
-  app.listen(5000, () => {
+  app.listen(config.server.port, () => {
     console.log("Server running on port 5000");
   });
 })
