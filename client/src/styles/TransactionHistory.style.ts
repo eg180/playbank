@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface Props {
+    bgColor?: string;
+}
+
 export const StyledTransactionHistory = styled.div`
     font-size: 1.50rem;
     display: flex;
@@ -27,7 +31,7 @@ export const StyledTransactionHistory = styled.div`
     }
 `;
 
-export const StyledTransactionLine = styled.span`
+export const StyledTransactionLine = styled.span<Props>`
     background-color: ${props => (props?.bgColor)};
     padding: .5rem;
     margin: .5rem;

@@ -14,7 +14,12 @@ const TransactionHistory = () => {
     const [transactions, setTransactions] = useState([]);
 
     function getIcon(transactionType: string): string {
-        return transactionType === 'transfer' ? '💸' : 'deposit' ? '🏦' : '👋🏼';
+        if (transactionType === TransactionTypeTextEnum.transfer) {
+            return '💸'
+        } else if (transactionType === TransactionTypeTextEnum.deposit) {
+            return '🏦'
+        }
+        return '👋🏼'
     }
 
     const getTransactionHistory = async () => {

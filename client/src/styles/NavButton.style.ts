@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledNavButton = styled.button`
+interface Props {
+    bgColor?: string;
+}
+
+export const StyledNavButton = styled.button<Props>`
     a {
         text-decoration: none;
         color: #264653;
