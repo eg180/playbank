@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
-interface Props {
-    bgColor?: string;
-}
 
-export const StyledNavButton = styled.button<Props>`
+export const StyledNavButton = styled.button`
     a {
         text-decoration: none;
         color: #264653;
@@ -15,7 +12,7 @@ export const StyledNavButton = styled.button<Props>`
     margin: 1rem 1rem;
     text-decoration: none;
     /* background: #6930c3; */
-    background-color: ${(props) => (props.bgColor ? props.bgColor : '#6930c3')};
+    background-color: ${(props: {bgColor: string}) => (props.bgColor ? props.bgColor : '#6930c3')};
     color: ${(props) => (props.color ? props.color : '#ffffff')};
     font-family: sans-serif;
     font-size: 1rem;
