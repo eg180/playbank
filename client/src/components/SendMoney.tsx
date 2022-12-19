@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import BASEURL from 'src/utilities/BASEURL';
 
 import Balance from './Balance';
 
@@ -40,7 +41,7 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
                 transferred_to: sendToRef?.current?.value,
             };
             try {
-                await axios.post(`http://localhost:5000/auth/client/transaction/create`, payload, {
+                await axios.post(`${BASEURL}/auth/client/transaction/create`, payload, {
                     headers: headerForPost,
                 });
                 const toastMessage = isMemo ? "IOU reminder created!" : `Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`;
