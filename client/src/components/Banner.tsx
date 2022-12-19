@@ -53,16 +53,16 @@ const Banner = (props: {refreshMemos: () => void;}) => {
                 </div>
             </Link>
             <nav>
-                <Link to={'/sendmoney'}>
+                { user && <Link to={'/sendmoney'}>
                     <StyledNavButton bgColor={'#41ead4'} color="black">
                         New IOU 🏎
                     </StyledNavButton>
-                </Link>
-                <Link to={'/dashboard'}>
+                </Link>}
+                { user && <Link to={'/dashboard'}>
                     <StyledNavButton bgColor={'#41ead4'} color="black">
                         My Dashboard
                     </StyledNavButton>
-                </Link>
+                </Link>}
                 {user === undefined && (
                     <div id="form-group">
                         <span id="no-acct">
