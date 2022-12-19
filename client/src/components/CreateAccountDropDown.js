@@ -21,7 +21,7 @@ const CreateAccountDropDown = (props) => {
         };
         
         try {
-             await axios.post(`${BASEURL}/api/auth/signup`, signUpObject);
+             await axios.post(`${BASEURL}/auth/signup`, signUpObject);
              console.log('sign up successful!');
 
         } catch (error) {
