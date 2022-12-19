@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 
+
 export const StyledNavButton = styled.button`
     a {
         text-decoration: none;
@@ -13,7 +14,7 @@ export const StyledNavButton = styled.button`
     text-decoration: none;
     /* background: #6930c3; */
     background-color: ${(props: {bgColor: string}) => (props.bgColor ? props.bgColor : '#6930c3')};
-    color: ${(props) => (props.color ? props.color : '#ffffff')};
+    color: ${(props: {color: string}) => (props.color ? props.color : '#ffffff')};
     font-family: sans-serif;
     font-size: 1rem;
     cursor: pointer;
