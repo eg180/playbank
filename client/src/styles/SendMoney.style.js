@@ -17,19 +17,14 @@ export const StyledSendMoney = styled.main`
         border-radius: 10px;
         min-height: 50vh;
         max-width: 50vw;
-        min-width: 45vw;
+        min-width: 30vw;
         
     }
-    @media screen and (max-width: 750px) {
-        main {
-            min-width: 80vw;
-        }
-    }
     form {
-        margin: 2rem;
+        margin: 0rem;
         padding: 5rem;
         border-radius: 5px;
-        max-width: 40%;
+        max-width: 70%;
         background-color: #edede9;
         box-shadow:
       1px 2px 2px hsl(220deg 60% 50% / 0.333),
@@ -37,6 +32,10 @@ export const StyledSendMoney = styled.main`
       3px 6px 6px hsl(220deg 60% 50% / 0.333);
         display: flex;
         flex-direction: column;
+        @media screen and (max-width: 550px) {
+            padding: 3rem;
+            max-width: 100%;
+        }
     }
     input {
         padding-top: 1rem;
