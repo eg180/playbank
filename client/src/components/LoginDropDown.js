@@ -11,14 +11,12 @@ const LoginDropDown = (props) => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        console.log('handling sign in submit');
         e.preventDefault();
         const signInObject: ClientSignUpInterface = {
             email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
         };
         await axios.post(`${BASEURL}/auth/login`, signInObject).then(res => {
-            console.log(res)
             sessionStorage.setItem("sesh", JSON.stringify(res.data.token))
             setUser(JSON.stringify(res.data.token));
             navigate('/dashboard')
