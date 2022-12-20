@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useGetJwtData from 'src/utilities/hooks/useGetJwtData';
 import { toast } from 'react-toastify';
 import BASEURL from 'src/utilities/BASEURL';
 
@@ -17,6 +18,7 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
     const sendToRef = useRef<HTMLInputElement>(null);
     const amountRef = useRef<HTMLInputElement>(null);
     const memoRef = useRef<HTMLInputElement>(null);
+    const token = useGetJwtData();
 
 
     const toggleChecked = ()  => {
@@ -26,9 +28,6 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
 
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-
-        const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
-        const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const headerForPost = { Authorization: `${token}` };
             const payload = isMemo ? {

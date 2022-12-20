@@ -3,6 +3,7 @@ import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
 import { StyledMemo } from '../styles/Memos.style';
 import { StyledNavButton } from '../styles/NavButton.style';
+import useGetJwtData from 'src/utilities/hooks/useGetJwtData';
 
 
 const Memos = (props: {refreshMemos: () => void}) => {
@@ -10,14 +11,13 @@ const Memos = (props: {refreshMemos: () => void}) => {
     const [memos, setMemos] = useState([]);
     const [selectedMemos, setSelectedMemos] = useState<string[]>([]);
     const [showItems, setShowItems] = useState(false);
+    const token = useGetJwtData();
 
     const toggleShowItems = () => {
         setShowItems(!showItems);
     };
 
     const handleDeleteMemo = async () => {
-        const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
-        const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {

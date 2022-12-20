@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
 import { StyledBalance } from '../styles/Balance.style'
+import useGetJwtData from 'src/utilities/hooks/useGetJwtData';
 
 
 
 
 const Balance = () => {
   const [balance, setBalance] = useState<number>(0);
+  const token = useGetJwtData();
 
   const getBalance = async () => {
-    const sessionToken: string  = sessionStorage.getItem("sesh") ?? 'notfound';
-    const token: string = JSON.parse(sessionToken);
         if (token !== 'notfound') {
             const header = { Authorization: `${token}` };
             try {
