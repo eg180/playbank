@@ -26,9 +26,22 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
         setShowMemoInput(!showMemoInput)
     };
 
+    function isOnlyNumbers(): boolean {
+        if (amountRef?.current?.value !== undefined) {
+            var regex = /[0-9]/g
+            const result = regex.test(amountRef?.current?.value);
+            if (result === true) {
+                return result;
+            } 
+            amountRef.current.value = '';
+            return result;
+        }
+        return false;
+    }
+
     const handleSubmit = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
-        if (token !== 'notfound') {
+        if (token !== 'notfound' && isOnlyNumbers() === true) {
             const headerForPost = { Authorization: `${token}` };
             const payload = isMemo ? {
                 type: 'reminder',
@@ -71,20 +84,20 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
                         progress: undefined,
                         theme: 'light',
                     });
-                } else {
-                    toast.error(`Something went wrong :(`, {
-                        position: 'top-center',
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: 'light',
-                    });
                 }
             }
-        }
+        } else if (isOnlyNumbers() === false) {
+            toast.warn(`😬 Only digits allowed in amount field.`, {
+                position: 'top-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+            });
+        };
     };
     return (
         <StyledSendMoney>
