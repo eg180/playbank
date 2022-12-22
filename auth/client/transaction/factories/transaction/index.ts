@@ -1,4 +1,4 @@
-import { TransactionTypes } from '../../../../../types/common'
+import { TransactionTypes } from '../../../../../types/transaction'
 export const getObjectForTransaction = (reqBod: {
     type: string;
     amount: number;
