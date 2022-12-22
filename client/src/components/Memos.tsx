@@ -66,12 +66,12 @@ const Memos = (props: { refreshMemos: () => void }) => {
     if (memos?.length > 0) {
         return (
             <StyledMemo>
-                {memos?.length > 0 && (
+                 (
                     <span id="memo-count" onClick={toggleShowItems}>
                         {' '}
                         ⏰ {memos?.length}
                     </span>
-                )}
+                )
                 {showItems && (
                     <ul>
                         {memos.map((memo: any) => {
