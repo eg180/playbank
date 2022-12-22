@@ -30,6 +30,9 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
         if (amountRef?.current?.value !== undefined) {
             var regex = /[0-9]/g
             const result = regex.test(amountRef?.current?.value);
+            if (result === true) {
+                return result;
+            } 
             amountRef.current.value = '';
             return result;
         }
