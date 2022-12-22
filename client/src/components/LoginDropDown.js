@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { AxiosError } from 'axios';
 import { StyledSignInSignUpInput } from '../styles/LoginDropDown.style';
 import BASEURL from '../utilities/BASEURL';
 
@@ -21,8 +23,31 @@ const LoginDropDown = (props) => {
             setUser(JSON.stringify(res.data.token));
             navigate('/dashboard')
             refreshMemos();
-        }).catch(err => {
-            console.log(err);
+        }).catch((err: AxiosError | Error)  => {
+            if (err instanceof AxiosError && err.response.status === 401) {
+                toast.warn(`🛡 Double-check your credentials.`, {
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: 'light',
+                })
+            } else {
+                toast.error(`😵 Something isn't right. Try again later.`, {
+                    position: 'top-center',
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: 'light',
+                })
+            }
+            
         });
         setShowSignIn(false);
     };
