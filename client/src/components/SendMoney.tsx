@@ -28,7 +28,7 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
 
     function isOnlyNumbers(): boolean {
         if (amountRef?.current?.value !== undefined) {
-            var regex = /[0-9]/g
+            const regex = /[0-9]/g
             const result = regex.test(amountRef?.current?.value);
             if (result === true) {
                 return result;
@@ -56,7 +56,7 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
                 await axios.post(`${BASEURL}/auth/client/transaction/create`, payload, {
                     headers: headerForPost,
                 });
-                const toastMessage = isMemo ? "IOU reminder created!" : `Successfully sent $${amountRef!.current!.value} to account ${sendToRef!.current!.value}`;
+                const toastMessage = isMemo ? "IOU reminder created!" : `Successfully sent $${amountRef?.current?.value} to account ${sendToRef!.current!.value}`;
                 toast.success(
                     toastMessage,
                     {
@@ -97,7 +97,7 @@ const SendMoney = (props: {refreshMemos: () => void}) => {
                 progress: undefined,
                 theme: 'light',
             });
-        };
+        }
     };
     return (
         <StyledSendMoney>

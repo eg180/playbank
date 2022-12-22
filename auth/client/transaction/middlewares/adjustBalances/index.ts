@@ -4,7 +4,7 @@ import { Transaction } from "../../../../../src/entities/Transaction";
 import { Memo } from "../../../../../src/entities/Memo";
 
 import { getObjectForTransaction } from "../../factories/transaction";
-import { TransactionTypes } from "../../../../../types/common";
+import { TransactionTypes } from "../../../../../types/transaction";
 
 module.exports = async (req: any, res: any, next: any) => {
   // const { clientId } = req.query;

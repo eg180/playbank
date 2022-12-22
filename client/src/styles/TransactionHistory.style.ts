@@ -19,6 +19,9 @@ export const StyledTransactionHistory = styled.div`
         flex-direction: column;
         filter: none;
     }
+    #transaction-title {
+        cursor: pointer;
+    }
     .transaction-type {
         font-size: 1rem;
     }

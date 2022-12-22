@@ -1,6 +1,6 @@
 import { Client } from "./Client";
 import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { TransactionTypes } from "../../types/common"
+import { TransactionTypes } from "../../types/transaction"
 
 
 @Entity("transactions")

@@ -1,5 +1,5 @@
 import { Balance } from "../../../../../src/entities/Balance";
-import {TransactionTypes} from "../../../../../types/common"
+import {TransactionTypes} from "../../../../../types/transaction"
 
 module.exports = async (req: any, res: any, next: any) => {
   const { type, amount } = req.body;
