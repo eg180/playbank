@@ -15,6 +15,7 @@ export const StyledBalance = styled.div`
     }
     #balance {
         filter: none;
+        cursor: pointer;
     }
     #balance-blur {
         filter: blur(.45em);

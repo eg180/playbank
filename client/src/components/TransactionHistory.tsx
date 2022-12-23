@@ -61,7 +61,7 @@ const TransactionHistory = () => {
     }, []);
     return (
         <StyledTransactionHistory>
-            <span id="transaction-title" onClick={toggleTransactionsVisibility}>{hideTransactions ? "Transactions (Hidden) - 👀 Show" : "Transactions - 🫣  Hide"}</span>
+            <span id="transaction-title" onClick={toggleTransactionsVisibility}>{hideTransactions ? "IOUs 📁" : "IOUs 📂"}</span>
             <span id="transactions">
                 {hideTransactions === false && transactions.map((transaction: any, index) => {
                     return (
