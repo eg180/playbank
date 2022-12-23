@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
 import { StyledBalance } from '../styles/Balance.style'
@@ -9,6 +10,8 @@ import useGetJwtData from 'src/utilities/hooks/useGetJwtData';
 
 const Balance = () => {
   const [balance, setBalance] = useState<number>(0);
+  const [hideBalance, setHideBalance] = useState<boolean>(true);
+
   const token = useGetJwtData();
 
   const getBalance = async () => {
@@ -16,19 +19,36 @@ const Balance = () => {
             const header = { Authorization: `${token}` };
             try {
             const res = await axios.get(`${BASEURL}/auth/client/balance`,  {headers: header});
-            console.log(res.data);
             setBalance(res.data.balance.balance);
             } catch (error) {
-                console.log(error);
+              toast.warning(`Could not fetch balance. 💀`, {
+                position: 'top-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'dark',
+            });
             }
   }
+};
+
+function toggleHideBalance() {
+  setHideBalance(!hideBalance);
 }
+
+function maskedDigits(): string {
+  const result = balance.toString().split('').reduce((cumulative, current) => current === '.' ? cumulative + '.' : cumulative + 'x', 'x');
+  return hideBalance === true ? result : balance.toString();
+};
   
   useEffect(() => {
     getBalance();
   }, [])
   return (
-    <StyledBalance><span id="balance-title">{' '}Balance:</span><span id='balance'>{' '}${balance}</span></StyledBalance>
+    <StyledBalance><span id="balance-title">{' '}Balance:</span><span id='balance' onClick={toggleHideBalance}>{' '}${maskedDigits()}</span></StyledBalance>
   )
 }
 
