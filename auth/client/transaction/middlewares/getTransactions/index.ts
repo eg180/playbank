@@ -13,7 +13,11 @@ module.exports = async (req: any, res: any, next: any) => {
     //   .getMany();
 
     const allTransactions = await appDataSource.query(
-      `SELECT * FROM transactions INNER JOIN clients ON clients.id = transactions.sender_user_id WHERE transactions.sender_user_id = ${clientId}`
+      `SELECT type, amount, first_name AS receiver_first_name, sender_user_id, client_id, receiver_user_id, paid, reminder_date, additional_info, due_date, reminder_date, transactions.updated_at, transactions.id AS transaction_id, transactions.created_at
+      FROM transactions
+      FULL OUTER JOIN clients
+      ON clients.id = transactions.receiver_user_id
+      WHERE sender_user_id = ${clientId} OR client_id = ${clientId}`
     );
    
  
