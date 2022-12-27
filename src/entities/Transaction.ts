@@ -62,6 +62,13 @@ export class Transaction extends BaseEntity {
         nullable: true,
     })
     due_date: Date;
+
+    @Column({
+        type: "boolean",
+        nullable: false,
+        default: false,
+    })
+    paid: boolean;
     
 
     @CreateDateColumn()
