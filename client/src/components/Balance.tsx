@@ -40,8 +40,8 @@ function toggleHideBalance() {
 }
 
 function maskedDigits(): string {
-  const result = balance.toString().split('').reduce((cumulative, current) => current === '.' ? cumulative + '.' : cumulative + 'x', 'x');
-  return hideBalance === true ? result : balance.toString();
+  const result = balance.toFixed(2).toString().split('').reduce((cumulative, current) => current === '.' ? cumulative + '.' : cumulative + 'x', 'x');
+  return hideBalance === true ? result : balance.toFixed(2).toString();
 };
   
   useEffect(() => {

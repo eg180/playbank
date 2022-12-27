@@ -17,7 +17,7 @@ export const getObjectForTransaction = (reqBod: {
             received_from: originator_id,
           }
         : type === TransactionTypes.DEPOSIT
-        ? { type: TransactionTypes.DEPOSIT, amount, client_id: originator_id }
+        ? { type: TransactionTypes.DEPOSIT, amount, client: clientId }
         : type === TransactionTypes.WITHDRAW
         ? { type: TransactionTypes.WITHDRAW, amount, client_id: originator_id }
         : { amount, memo, client: clientId };
