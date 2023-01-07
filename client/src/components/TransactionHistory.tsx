@@ -27,6 +27,7 @@ export interface Transaction {
     created_at: Date;
     reminder_date: Date;
     type: TransactionTypes;
+    accepted_by_receiver: boolean;
     updated_at: Date;
 }
 

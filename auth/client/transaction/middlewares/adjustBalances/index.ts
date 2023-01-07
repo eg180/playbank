@@ -7,7 +7,6 @@ import { getObjectForTransaction } from "../../factories/transaction";
 import { TransactionTypes } from "../../../../../types/transaction";
 
 module.exports = async (req: any, res: any, next: any) => {
-  // const { clientId } = req.query;
   const clientId = req.jwtSub;
   const { type } = req.body;
   const obj: any = getObjectForTransaction(req.body, clientId as any);
