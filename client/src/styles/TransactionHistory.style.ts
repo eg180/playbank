@@ -34,7 +34,15 @@ export const StyledTransactionHistory = styled.div`
 `;
 
 export const StyledTransactionLine = styled.span`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     background-color: ${(props: {bgColor: string}) => (props?.bgColor)};
     padding: .5rem;
     margin: .5rem;
+    #due-date {
+        position: absolute;
+        right: 9px; 
+    }
 `

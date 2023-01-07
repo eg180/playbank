@@ -4,12 +4,6 @@ import BASEURL from '../utilities/BASEURL';
 import { Tooltip } from 'antd';
 import { StyledTransactionHistory, StyledTransactionLine } from '../styles/TransactionHistory.style';
 
-enum TransactionTypeTextEnum {
-    transfer = 'IOU',
-    deposit = 'Deposit',
-    withdraw = 'Withdraw',
-}
-
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
     WITHDRAW = 'withdraw',
@@ -37,10 +31,10 @@ const TransactionHistory = () => {
     const [hideTransactions, setHideTransactions] = useState<boolean>(true);
 
     function getIcon(transactionType: string): string {
-        if (transactionType === TransactionTypeTextEnum.transfer) {
+        if (transactionType === 'transfer') {
             return '💸';
-        } else if (transactionType === TransactionTypeTextEnum.deposit) {
-            return '🏦';
+        } else if (transactionType === 'deposit') {
+            return '💰';
         }
         return '📝';
     }
@@ -77,7 +71,7 @@ const TransactionHistory = () => {
     return (
         <StyledTransactionHistory>
             <span id="transaction-title" onClick={toggleTransactionsVisibility}>
-                {hideTransactions ? 'IOUs 📁' : 'IOUs 📂'}
+                {hideTransactions ? 'Activity 📁' : 'Activity 📂'}
             </span>
             <span id="transactions">
                 {hideTransactions === false &&
@@ -86,17 +80,25 @@ const TransactionHistory = () => {
                             <>
                                 <StyledTransactionLine
                                     className={'transaction-line'}
-                                    bgColor={index % 2 === 0 ? '#809bce' : '#95b8d1'}
+                                    bgColor={index % 2 === 0 ? '#6a687a' : '#84828f'}
                                     key={transaction.transaction_id}
                                 >
-                                    {getIcon(transaction.type)}{' '}
-                                    <span className={'transaction-type'}>{getText(transaction.type)}</span> of $
-                                    {transaction.amount} to {transaction.receiver_first_name}{' '}
-                                    {transaction.paid ? 'paid' : 'unpaid'}{' '}
-                                    <Tooltip title={`${transaction.paid ? 'Mark As Unpaid ❌' : 'Mark As Paid ✅'}`}>
-                                        <span id="paid-status">{transaction.paid ? '✅' : '❌'}</span>
+                                    <span className={'transaction-type'}>{getText(transaction.type)}</span>
+                                    <Tooltip title={`To: ${transaction.receiver_first_name}`}>
+                                        ${transaction.amount}
                                     </Tooltip>
-                                    {transaction?.due_date ? `Due: ${transaction.due_date}` : ''}{' '}
+                                    {transaction.type !== TransactionTypes.DEPOSIT ? (
+                                        <Tooltip
+                                            title={`${transaction.paid ? 'Mark As Unpaid ❌' : 'Mark As Paid ✅'}`}
+                                        >
+                                            <span id="paid-status">{transaction.paid ? '✅' : '🧳'}</span>
+                                        </Tooltip>
+                                    ) : (
+                                        '💰'
+                                    )}
+                                    <Tooltip title={`${transaction.due_date}`}>
+                                        <span id="due-date">{transaction?.due_date ? `🗓` : ''} </span>
+                                    </Tooltip>
                                 </StyledTransactionLine>
                             </>
                         );

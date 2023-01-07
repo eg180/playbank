@@ -5,7 +5,6 @@ import { appDataSource } from "../../../../../dbconfig";
 
 module.exports = async (req: any, res: any, next: any) => {
   const clientId = req.jwtSub;
-  console.log('in approved')
   try {
     // const transactions = await appDataSource
     //   .getRepository(Transaction)
