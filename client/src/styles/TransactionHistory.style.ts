@@ -28,6 +28,9 @@ export const StyledTransactionHistory = styled.div`
     #balance-blur {
         filter: blur(.45em);
     }
+    #paid-status {
+        cursor: pointer;
+    }
 `;
 
 export const StyledTransactionLine = styled.span`
