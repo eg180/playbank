@@ -65,10 +65,15 @@ export class Transaction extends BaseEntity {
 
     @Column({
         type: "boolean",
-        nullable: false,
-        default: false,
+        nullable: true,
     })
     paid: boolean;
+
+    @Column({
+        type: "boolean",
+        nullable: true,
+    })
+    accepted_by_receiver: boolean;
     
 
     @CreateDateColumn()

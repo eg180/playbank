@@ -7,7 +7,7 @@ import { StyledSignInSignUpInput } from '../styles/LoginDropDown.style';
 import BASEURL from '../utilities/BASEURL';
 
 const LoginDropDown = (props) => {
-    const { setShowSignIn, setUser, refreshMemos } = props;
+    const { setShowSignIn, setUser, refreshMemos, refreshIous } = props;
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ const LoginDropDown = (props) => {
             setUser(JSON.stringify(res.data.token));
             navigate('/dashboard')
             refreshMemos();
+            refreshIous();
         }).catch((err: AxiosError | Error)  => {
             if (err instanceof AxiosError && err.response.status === 401) {
                 toast.warn(`🛡 Double-check your credentials.`, {

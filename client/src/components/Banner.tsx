@@ -5,8 +5,8 @@ import LoginDropDown from './LoginDropDown';
 import CreateAccountDropDown from './CreateAccountDropDown';
 import { StyledNavButton } from '../styles/NavButton.style';
 
-const Banner = (props: {refreshMemos: () => void;}) => {
-    const { refreshMemos } = props;
+const Banner = (props: {refreshMemos: () => void; refreshIous: () => void;}) => {
+    const { refreshMemos, refreshIous } = props;
     const [showSignIn, setShowSignIn] = useState<boolean>(false);
     const [showCreateAccount, setShowCreateAccount] = useState<boolean>(false);
     const [user, setUser] = useState<string | undefined>(undefined);
@@ -107,7 +107,7 @@ const Banner = (props: {refreshMemos: () => void;}) => {
             {user === undefined && (
                 <div id="inputs">
                     {showCreateAccount && <CreateAccountDropDown setShowCreateAccount={setShowCreateAccount} />}
-                    {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} refreshMemos={refreshMemos} setUser={setUser} />}
+                    {showSignIn && <LoginDropDown setShowSignIn={setShowSignIn} refreshMemos={refreshMemos} refreshIous={refreshIous} setUser={setUser} />}
                 </div>
             )}
         </StyledBanner>
