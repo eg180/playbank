@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import TransactionLine from 'src/components/TransactionLine';
 import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
-import { Tooltip } from 'antd';
-import {
-    StyledTransactionAmount,
-    StyledTransactionHistory,
-    StyledTransactionLine,
-    StyledTransactionType,
-} from '../styles/TransactionHistory.style';
+import { StyledTransactionHistory } from '../styles/TransactionHistory.style';
 
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
@@ -43,21 +38,6 @@ const TransactionHistory = () => {
     //     }
     //     return '📝';
     // }
-    const amountColor = (transactionType: string, sender_id: number, paid: boolean) =>
-        transactionType === TransactionTypes.DEPOSIT
-            ? '#00afb9'
-            : transactionType === TransactionTypes.TRANSFER && !paid
-            ? sender_id === 1
-                ? '#fb6f92'
-                : '#'
-            : 'black';
-
-    function getText(transactionType: string): string {
-        if (transactionType === 'transfer') {
-            return 'IOU';
-        }
-        return transactionType.toUpperCase();
-    }
 
     function toggleTransactionsVisibility(): void {
         setHideTransactions(!hideTransactions);
@@ -88,49 +68,9 @@ const TransactionHistory = () => {
             </span>
             <span id="transactions">
                 {hideTransactions === false &&
-                    transactions.map((transaction: Transaction, index) => {
-                        return (
-                            <>
-                                <StyledTransactionLine
-                                    className={'transaction-line'}
-                                    bgColor={index % 2 === 0 ? '#6a687a' : '#84828f'}
-                                    key={transaction.transaction_id}
-                                >
-                                    <StyledTransactionType>{getText(transaction.type)}</StyledTransactionType>
-                                    <StyledTransactionAmount
-                                        color={amountColor(
-                                            transaction.type,
-                                            transaction.sender_user_id,
-                                            transaction.paid,
-                                        )}
-                                    >
-                                        <Tooltip
-                                            title={`To: ${
-                                                transaction.type === TransactionTypes.TRANSFER
-                                                    ? transaction.receiver_first_name
-                                                    : `me From: ${transaction.sender_user_id}`
-                                            }`}
-                                        >
-                                            ${transaction.amount}
-                                        </Tooltip>
-                                    </StyledTransactionAmount>
-
-                                    {transaction.type !== TransactionTypes.DEPOSIT ? (
-                                        <Tooltip
-                                            title={`${transaction.paid ? 'Mark As Unpaid ❌' : 'Mark As Paid ✅'}`}
-                                        >
-                                            <span id="paid-status">{transaction.paid ? '✅' : '🧳'}</span>
-                                        </Tooltip>
-                                    ) : (
-                                        '💰'
-                                    )}
-                                    <Tooltip title={`${transaction.due_date}`}>
-                                        <span id="due-date">{transaction?.due_date ? `🗓` : ''} </span>
-                                    </Tooltip>
-                                </StyledTransactionLine>
-                            </>
-                        );
-                    })}
+                    transactions.map((transaction: Transaction, index) => (
+                        <TransactionLine transaction={transaction} index={index} setTransactions={setTransactions} />
+                    ))}
             </span>
         </StyledTransactionHistory>
     );

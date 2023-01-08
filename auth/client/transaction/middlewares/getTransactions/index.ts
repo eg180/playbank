@@ -5,6 +5,7 @@ import { appDataSource } from "../../../../../dbconfig";
 
 module.exports = async (req: any, res: any, next: any) => {
   const clientId = req.jwtSub;
+  console.log('clientId', clientId);
   try {
     // const transactions = await appDataSource
     //   .getRepository(Transaction)
@@ -17,7 +18,8 @@ module.exports = async (req: any, res: any, next: any) => {
       FROM transactions
       FULL OUTER JOIN clients
       ON clients.id = transactions.receiver_user_id
-      WHERE sender_user_id = ${clientId} OR client_id = ${clientId} OR receiver_user_id = ${clientId} AND accepted_by_receiver = true`
+      WHERE sender_user_id = ${clientId} OR client_id = ${clientId} OR receiver_user_id = ${clientId} AND accepted_by_receiver = true
+      ORDER BY created_at ASC`
     );
    
  

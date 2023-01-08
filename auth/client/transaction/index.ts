@@ -8,12 +8,13 @@ const getBalance = require('../middlewares/getBalance');
 const getTransactions = require('./middlewares/getTransactions');
 const getUnapprovedTransactions = require('./middlewares/getUnapprovedTransactions');
 const modifyUnapprovedTransactions = require('./middlewares/modifyUnapprovedTransactions');
-
+const updatePaidStatus = require('./middlewares/updatePaidStatus');
 const router = express.Router();
 
+router.put(`/`, updatePaidStatus, getTransactions, async (req, res) => {
+});
+
 router.put('/unapproved', modifyUnapprovedTransactions, (req, res) => {
-    console.log('req bod of put unapproved', req.body);
-    console.log('in unapproved put');
     res.end();
 });
 
