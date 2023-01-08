@@ -39,9 +39,11 @@ function App() {
         <>
             <GlobalStyle />
             <ToastContainer />
-            {showMemos && <Memos refreshMemos={refreshMemos} />}
-            {showIouRequests && <IOUNotifications refreshIous={refreshIous} />}
+            <section>{showMemos && <Memos refreshMemos={refreshMemos} />}
+            {showIouRequests && <IOUNotifications refreshIous={refreshIous} />}</section>
+            
             <Banner refreshMemos={refreshMemos} refreshIous={refreshIous} />
+            
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />

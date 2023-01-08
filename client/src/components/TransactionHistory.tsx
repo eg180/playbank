@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import TransactionLine from 'src/components/TransactionLine';
 import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
-import { StyledTransactionHistory, StyledTransactionLine } from '../styles/TransactionHistory.style';
-
-enum TransactionTypeTextEnum {
-    transfer = 'IOU',
-    deposit = 'Deposit',
-    withdraw = 'Withdraw',
-}
+import { StyledTransactionHistory } from '../styles/TransactionHistory.style';
 
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
     WITHDRAW = 'withdraw',
-    TRANSFER = 'IOU',
+    TRANSFER = 'transfer',
     REMINDER = 'reminder',
 }
 
@@ -35,28 +30,14 @@ const TransactionHistory = () => {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [hideTransactions, setHideTransactions] = useState<boolean>(true);
 
-    function getIcon(transactionType: string): string {
-        if (transactionType === TransactionTypeTextEnum.transfer) {
-            return '💸';
-        } else if (transactionType === TransactionTypeTextEnum.deposit) {
-            return '🏦';
-        }
-        return '📝';
-    }
-
-    function getText(transactionType: string): string {
-        if (transactionType === 'transfer') {
-            return 'IOU';
-        }
-        return transactionType.toUpperCase();
-    }
-
-    function getTransactionInfo(transactionObject: Transaction): string {
-        if (transactionObject.type !== 'deposit') {
-            return `to ${transactionObject.receiver_first_name} Status: ${transactionObject.paid ? 'Paid ✅' : 'Unpaid ⏰'} ${transactionObject?.due_date ? `Due: ${transactionObject.due_date}` : ''}`
-        }
-        return ''
-    }
+    // function getIcon(transactionType: string): string {
+    //     if (transactionType === 'transfer') {
+    //         return '💸';
+    //     } else if (transactionType === 'deposit') {
+    //         return '💰';
+    //     }
+    //     return '📝';
+    // }
 
     function toggleTransactionsVisibility(): void {
         setHideTransactions(!hideTransactions);
@@ -83,23 +64,13 @@ const TransactionHistory = () => {
     return (
         <StyledTransactionHistory>
             <span id="transaction-title" onClick={toggleTransactionsVisibility}>
-                {hideTransactions ? 'IOUs 📁' : 'IOUs 📂'}
+                {hideTransactions ? 'Activity 📁' : 'Activity 📂'}
             </span>
             <span id="transactions">
                 {hideTransactions === false &&
-                    transactions.map((transaction: Transaction, index) => {
-                        return (
-                            <StyledTransactionLine
-                                className={'transaction-line'}
-                                bgColor={index % 2 === 0 ? '#809bce' : '#95b8d1'}
-                                key={transaction.transaction_id}
-                            >
-                                {getIcon(transaction.type)}{' '}
-                                <span className={'transaction-type'}>{getText(transaction.type)}</span> of $
-                                {transaction.amount} {getTransactionInfo(transaction)}
-                            </StyledTransactionLine>
-                        );
-                    })}
+                    transactions.map((transaction: Transaction, index) => (
+                        <TransactionLine transaction={transaction} index={index} setTransactions={setTransactions} />
+                    ))}
             </span>
         </StyledTransactionHistory>
     );

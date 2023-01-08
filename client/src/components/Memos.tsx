@@ -60,7 +60,6 @@ const Memos = (props: { refreshMemos: () => void }) => {
     };
 
     useEffect(() => {
-        console.log('getting memos')
         getMemos();
     }, [refreshMemos]);
 
@@ -74,7 +73,7 @@ const Memos = (props: { refreshMemos: () => void }) => {
 
                 {showItems && (
                     <ul>
-                        {memos?.map((memo: any) => {
+                        {memos.map((memo: any) => {
                             return (
                                 <li key={memo.id}>
                                     {memo.memo}
@@ -83,7 +82,7 @@ const Memos = (props: { refreshMemos: () => void }) => {
                                 </li>
                             );
                         })}
-                        <StyledNavButton onClick={handleDeleteMemo}>Done</StyledNavButton>
+                        <StyledNavButton onClick={handleDeleteMemo}>Delete</StyledNavButton>
                     </ul>
                 )}
             </StyledMemo>
