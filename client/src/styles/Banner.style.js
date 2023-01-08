@@ -23,6 +23,12 @@ background-color: #DFDBE5;
         margin: 5rem;
         display: flex;
     }
+    #greeting {
+        font-family: 'Abril Fatface', cursive;
+        color: charcoal;
+        font-size: 1rem;
+        padding: 0.25rem 0rem 0rem 1rem;
+    }
     nav {
         display: flex;
         justify-content: flex-end;

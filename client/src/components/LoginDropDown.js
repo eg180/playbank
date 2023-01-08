@@ -7,7 +7,7 @@ import { StyledSignInSignUpInput } from '../styles/LoginDropDown.style';
 import BASEURL from '../utilities/BASEURL';
 
 const LoginDropDown = (props) => {
-    const { setShowSignIn, setUser, refreshMemos, refreshIous } = props;
+    const { setShowSignIn, setUser, setUserToken, refreshMemos, refreshIous } = props;
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const navigate = useNavigate();
@@ -20,7 +20,9 @@ const LoginDropDown = (props) => {
         };
         await axios.post(`${BASEURL}/auth/login`, signInObject).then(res => {
             sessionStorage.setItem("sesh", JSON.stringify(res.data.token))
-            setUser(JSON.stringify(res.data.token));
+            sessionStorage.setItem("moi", JSON.stringify({name: res.data.name, sub: res.data.sub}))
+            setUserToken(res.data.token)
+            setUser({name: res.data.name, sub: res.data.sub});
             navigate('/dashboard')
             refreshMemos();
             refreshIous();

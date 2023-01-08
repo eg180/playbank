@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TransactionTypes } from 'src/components/TransactionHistory';
 
 export const StyledTransactionHistory = styled.div`
     font-size: 1.50rem;
@@ -34,10 +35,8 @@ export const StyledTransactionHistory = styled.div`
 `;
 
 export const StyledTransactionLine = styled.span`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 47.5% 47.5% 5%;
     background-color: ${(props: {bgColor: string}) => (props?.bgColor)};
     padding: .5rem;
     margin: .5rem;
@@ -45,4 +44,12 @@ export const StyledTransactionLine = styled.span`
         position: absolute;
         right: 9px; 
     }
+`
+
+export const StyledTransactionType = styled.span`
+    color: ${(props: {color: string}) => (props?.color)};
+`
+
+export const StyledTransactionAmount = styled.span`
+    color: ${(props: {color: string}) => (props?.color)};
 `

@@ -24,7 +24,7 @@ module.exports = async (
 
           const token = makeJwt(client);
           req.jwt = token;
-          return res.status(200).json({ success: "ok", email: client.email, token: req.jwt });
+          return res.status(200).json({ success: "ok", name: client.first_name, sub: client.id, token: req.jwt });
       });
       
     } else {

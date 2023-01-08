@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BASEURL from '../utilities/BASEURL';
 import { Tooltip } from 'antd';
-import { StyledTransactionHistory, StyledTransactionLine } from '../styles/TransactionHistory.style';
+import {
+    StyledTransactionAmount,
+    StyledTransactionHistory,
+    StyledTransactionLine,
+    StyledTransactionType,
+} from '../styles/TransactionHistory.style';
 
 export enum TransactionTypes {
     DEPOSIT = 'deposit',
     WITHDRAW = 'withdraw',
-    TRANSFER = 'IOU',
+    TRANSFER = 'transfer',
     REMINDER = 'reminder',
 }
 
@@ -30,14 +35,22 @@ const TransactionHistory = () => {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [hideTransactions, setHideTransactions] = useState<boolean>(true);
 
-    function getIcon(transactionType: string): string {
-        if (transactionType === 'transfer') {
-            return '💸';
-        } else if (transactionType === 'deposit') {
-            return '💰';
-        }
-        return '📝';
-    }
+    // function getIcon(transactionType: string): string {
+    //     if (transactionType === 'transfer') {
+    //         return '💸';
+    //     } else if (transactionType === 'deposit') {
+    //         return '💰';
+    //     }
+    //     return '📝';
+    // }
+    const amountColor = (transactionType: string, sender_id: number, paid: boolean) =>
+        transactionType === TransactionTypes.DEPOSIT
+            ? '#00afb9'
+            : transactionType === TransactionTypes.TRANSFER && !paid
+            ? sender_id === 1
+                ? '#fb6f92'
+                : '#'
+            : 'black';
 
     function getText(transactionType: string): string {
         if (transactionType === 'transfer') {
@@ -83,10 +96,25 @@ const TransactionHistory = () => {
                                     bgColor={index % 2 === 0 ? '#6a687a' : '#84828f'}
                                     key={transaction.transaction_id}
                                 >
-                                    <span className={'transaction-type'}>{getText(transaction.type)}</span>
-                                    <Tooltip title={`To: ${transaction.receiver_first_name}`}>
-                                        ${transaction.amount}
-                                    </Tooltip>
+                                    <StyledTransactionType>{getText(transaction.type)}</StyledTransactionType>
+                                    <StyledTransactionAmount
+                                        color={amountColor(
+                                            transaction.type,
+                                            transaction.sender_user_id,
+                                            transaction.paid,
+                                        )}
+                                    >
+                                        <Tooltip
+                                            title={`To: ${
+                                                transaction.type === TransactionTypes.TRANSFER
+                                                    ? transaction.receiver_first_name
+                                                    : `me From: ${transaction.sender_user_id}`
+                                            }`}
+                                        >
+                                            ${transaction.amount}
+                                        </Tooltip>
+                                    </StyledTransactionAmount>
+
                                     {transaction.type !== TransactionTypes.DEPOSIT ? (
                                         <Tooltip
                                             title={`${transaction.paid ? 'Mark As Unpaid ❌' : 'Mark As Paid ✅'}`}
