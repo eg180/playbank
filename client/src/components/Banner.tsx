@@ -56,7 +56,7 @@ const Banner = (props: { refreshMemos: () => void; refreshIous: () => void }) =>
                     <span id="sub-logo">As Good As Money</span>
                 </div>
             </Link>
-            <span id="greeting">{`Hi, ${user?.name?.toUpperCase() ?? 'USER'}`}</span>
+            {user?.name && <span id="greeting">{`Hi, ${user.name.toUpperCase() ?? 'user'}`}</span>}
             <nav>
                 {userToken && (
                     <Link to={'/sendmoney'}>
