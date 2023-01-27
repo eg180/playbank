@@ -42,7 +42,6 @@ const Memos = (props: { refreshMemos: () => void }) => {
             const updatedIds = selectedMemos.filter((id) => id !== e.target.id);
             setSelectedMemos(updatedIds);
         }
-        refreshMemos();
     };
 
     const getMemos = async () => {
