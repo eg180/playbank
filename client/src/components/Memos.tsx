@@ -76,7 +76,7 @@ const Memos = (props: { refreshMemos: () => void }) => {
                         {memos.map((memo: any) => {
                             return (
                                 <li key={memo.id}>
-                                    {memo.memo}
+                                    <span id="memo-text">{memo.memo}</span>{' '}
                                     <span id="memo-amount"> ${memo.amount}</span>
                                     <input type="checkbox" id={memo.id} onChange={addToSelectedMemos} />
                                 </li>
